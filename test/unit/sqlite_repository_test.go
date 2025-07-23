@@ -1,14 +1,16 @@
 package unit
 
 import (
+	"fmt"
 	"os"
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"todo-app/internal/model"
 	"todo-app/internal/repository"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestSQLiteTodoRepository_Create(t *testing.T) {
@@ -80,12 +82,12 @@ func TestSQLiteTodoRepository_GetAll(t *testing.T) {
 	// Then: All todos should be returned
 	require.NoError(t, err)
 	assert.Len(t, todos, 2)
-	
+
 	// And: Should be ordered by created_at DESC (newest first)
 	assert.Equal(t, "todo 2", todos[0].Text) // Second todo (newer) should be first
 	assert.Equal(t, "todo 1", todos[1].Text) // First todo (older) should be second
-	assert.True(t, todos[0].CreatedAt.After(todos[1].CreatedAt) || 
-				todos[0].CreatedAt.Equal(todos[1].CreatedAt))
+	assert.True(t, todos[0].CreatedAt.After(todos[1].CreatedAt) ||
+		todos[0].CreatedAt.Equal(todos[1].CreatedAt))
 }
 
 func TestSQLiteTodoRepository_Update(t *testing.T) {
@@ -106,8 +108,8 @@ func TestSQLiteTodoRepository_Update(t *testing.T) {
 	assert.Equal(t, created.ID, result.ID)
 	assert.Equal(t, "updated text", result.Text)
 	assert.WithinDuration(t, created.CreatedAt, result.CreatedAt, time.Second)
-	assert.True(t, result.UpdatedAt.After(created.UpdatedAt) || 
-				result.UpdatedAt.Equal(created.UpdatedAt))
+	assert.True(t, result.UpdatedAt.After(created.UpdatedAt) ||
+		result.UpdatedAt.Equal(created.UpdatedAt))
 
 	// And: Database should reflect the change
 	fetched, err := repo.GetByID(created.ID)
@@ -192,18 +194,22 @@ func TestSQLiteTodoRepository_DatabasePersistence(t *testing.T) {
 
 // Test helper functions
 func setupTestDB(t *testing.T) (repository.TodoRepository, func()) {
-	// Create temporary database file
-	dbFile := "test_todos.db"
-	
+	// Set test environment
+	os.Setenv("ENV", "test")
+
+	// Create temporary database file with unique name
+	dbFile := fmt.Sprintf("test_todos_%d.db", time.Now().UnixNano())
+
 	// Remove if exists
 	os.Remove(dbFile)
-	
+
 	repo, err := repository.NewSQLiteTodoRepository(dbFile)
 	require.NoError(t, err)
 
 	cleanup := func() {
 		repo.Close()
 		os.Remove(dbFile)
+		os.Unsetenv("ENV")
 	}
 
 	return repo, cleanup
@@ -218,4 +224,4 @@ func setupTestDBWithSameFile(t *testing.T, dbFile string) (repository.TodoReposi
 	}
 
 	return repo, cleanup
-} 
+}

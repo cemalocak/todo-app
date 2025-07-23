@@ -1,0 +1,63 @@
+# Database files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+todos*.db
+
+# Binaries
+/main
+/todo-app
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go specific
+*.out
+*.test
+*.prof
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Node modules (for any future frontend build)
+node_modules/
+
+# Build artifacts
+dist/
+build/
+
+# Coverage
+coverage/
+*.coverprofile
+
+# Temporary files
+tmp/
+temp/
+
+# Docker volumes data
+data/ 
