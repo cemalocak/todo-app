@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"time"
 
-	_ "modernc.org/sqlite"
 	"todo-app/internal/model"
+
+	_ "modernc.org/sqlite"
 )
 
 //go:embed database/schema.sql
@@ -53,12 +54,12 @@ func (r *SQLiteTodoRepository) migrate() error {
 // Create adds a new todo to the database
 func (r *SQLiteTodoRepository) Create(todo *model.Todo) (*model.Todo, error) {
 	now := time.Now()
-	
+
 	query := `
 		INSERT INTO todos (text, created_at, updated_at) 
 		VALUES (?, ?, ?)
 	`
-	
+
 	result, err := r.db.Exec(query, todo.Text, now, now)
 	if err != nil {
 		return nil, err
@@ -110,7 +111,7 @@ func (r *SQLiteTodoRepository) GetAll() ([]*model.Todo, error) {
 	}
 	defer rows.Close()
 
-	var todos []*model.Todo
+	todos := make([]*model.Todo, 0) // Initialize as empty slice, not nil
 	for rows.Next() {
 		todo := &model.Todo{}
 		err := rows.Scan(&todo.ID, &todo.Text, &todo.CreatedAt, &todo.UpdatedAt)
@@ -126,13 +127,13 @@ func (r *SQLiteTodoRepository) GetAll() ([]*model.Todo, error) {
 // Update modifies an existing todo in the database
 func (r *SQLiteTodoRepository) Update(todo *model.Todo) (*model.Todo, error) {
 	now := time.Now()
-	
+
 	query := `
 		UPDATE todos 
 		SET text = ?, updated_at = ? 
 		WHERE id = ?
 	`
-	
+
 	result, err := r.db.Exec(query, todo.Text, now, todo.ID)
 	if err != nil {
 		return nil, err
@@ -154,7 +155,7 @@ func (r *SQLiteTodoRepository) Update(todo *model.Todo) (*model.Todo, error) {
 // Delete removes a todo from the database
 func (r *SQLiteTodoRepository) Delete(id int) error {
 	query := `DELETE FROM todos WHERE id = ?`
-	
+
 	result, err := r.db.Exec(query, id)
 	if err != nil {
 		return err
@@ -180,4 +181,4 @@ func (r *SQLiteTodoRepository) DBPath() string {
 // Close closes the database connection
 func (r *SQLiteTodoRepository) Close() error {
 	return r.db.Close()
-} 
+}
