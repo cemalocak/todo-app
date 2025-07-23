@@ -131,9 +131,9 @@ jobs:
           ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_HOST }} '
             cd ~/todo-app
             export PATH="/usr/local/bin:$PATH"
-            export BACKEND_IMAGE=ghcr.io/${{ github.repository }}/backend:${{ github.sha }}
-            export FRONTEND_IMAGE=ghcr.io/${{ github.repository }}/frontend:${{ github.sha }}
-            ./deploy.sh || echo "Deploy script not found, running manual commands"
+            export BACKEND_IMAGE=ghcr.io/${{ github.repository }}-backend:latest
+            export FRONTEND_IMAGE=ghcr.io/${{ github.repository }}-frontend:latest
+            ~/todo-app/deploy.sh || echo "Deploy script not found, running manual commands"
           '
 
   # 🧪 API Contract Tests (Optional)
@@ -148,11 +148,24 @@ jobs:
 
       - name: 🔌 Run API contract tests
         run: |
-          # Wait for deployment
-          sleep 30
-          # Run contract tests against test environment
-          curl -f ${{ secrets.TEST_API_URL }}/api/todos || exit 1
-          echo "✅ API contract tests passed"
+          # Wait for deployment to stabilize
+          echo "⏳ Waiting for deployment to stabilize..."
+          sleep 60
+
+          # Run contract tests with retry logic
+          for i in {1..5}; do
+            echo "🔌 API test attempt $i/5..."
+            if curl -f --max-time 10 ${{ secrets.TEST_API_URL }}/api/todos; then
+              echo "✅ API contract tests passed"
+              exit 0
+            else
+              echo "⏳ Retrying in 30 seconds..."
+              sleep 30
+            fi
+          done
+
+          echo "❌ API contract tests failed after 5 attempts"
+          exit 1
 
   # 🌐 E2E UI Tests (Optional)
   e2e-tests:
