@@ -224,16 +224,17 @@ jobs:
           # Login to GitHub Container Registry
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-          # Stop existing containers - aggressive cleanup
-          docker-compose -f docker-compose.prod.yml down --volumes --remove-orphans || true
+          # Stop existing containers - preserve data volumes
+          docker-compose -f docker-compose.prod.yml down --remove-orphans || true
 
           # Force remove containers by name if they still exist
           docker stop watchtower-prod todo-backend-prod todo-frontend-prod || true
           docker rm watchtower-prod todo-backend-prod todo-frontend-prod || true
 
-          # Clean up networks and dangling images
+          # Clean up networks and dangling images (preserve data volumes)
           docker network prune -f || true
           docker image prune -f || true
+          # Note: Deliberately NOT pruning volumes to preserve data
 
           # Pull latest images
           docker pull ${{ needs.build.outputs.backend-image }}
