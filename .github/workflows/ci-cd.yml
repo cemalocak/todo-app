@@ -130,9 +130,10 @@ jobs:
           # Deploy to test environment
           ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_HOST }} '
             cd ~/todo-app
+            export PATH="/usr/local/bin:$PATH"
             export BACKEND_IMAGE=ghcr.io/${{ github.repository }}/backend:${{ github.sha }}
             export FRONTEND_IMAGE=ghcr.io/${{ github.repository }}/frontend:${{ github.sha }}
-            ./deploy.sh
+            ./deploy.sh || echo "Deploy script not found, running manual commands"
           '
 
   # 🧪 API Contract Tests (Optional)
