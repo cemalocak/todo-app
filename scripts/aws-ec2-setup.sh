@@ -9,27 +9,24 @@ echo "🚀 Starting AWS EC2 setup for Todo App..."
 
 # Update system
 echo "📦 Updating system packages..."
-sudo apt-get update -y
-sudo apt-get upgrade -y
+sudo yum update -y
 
 # Install essential packages
 echo "🔧 Installing essential packages..."
-sudo apt-get install -y \
+sudo yum install -y \
     curl \
     wget \
     git \
     unzip \
     htop \
-    nano \
-    ufw \
-    fail2ban
+    nano
 
 # Install Docker
 echo "🐳 Installing Docker..."
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
+sudo yum install -y docker
+sudo systemctl start docker
+sudo systemctl enable docker
 sudo usermod -aG docker $USER
-rm get-docker.sh
 
 # Install Docker Compose
 echo "🐳 Installing Docker Compose..."
