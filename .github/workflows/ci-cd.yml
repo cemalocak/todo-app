@@ -128,7 +128,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
           # Deploy to test environment
-          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_HOST }} '
+          ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_HOST }} '
             cd ~/todo-app
             export BACKEND_IMAGE=ghcr.io/${{ github.repository }}/backend:${{ github.sha }}
             export FRONTEND_IMAGE=ghcr.io/${{ github.repository }}/frontend:${{ github.sha }}
@@ -232,9 +232,9 @@ jobs:
           EOF
 
           # Execute deployment on EC2
-          scp deploy.sh ubuntu@${{ secrets.EC2_HOST }}:~/
-          scp docker-compose.prod.yml ubuntu@${{ secrets.EC2_HOST }}:~/
-          ssh ubuntu@${{ secrets.EC2_HOST }} 'bash ~/deploy.sh'
+          scp deploy.sh ec2-user@${{ secrets.EC2_HOST }}:~/
+          scp docker-compose.prod.yml ec2-user@${{ secrets.EC2_HOST }}:~/
+          ssh ec2-user@${{ secrets.EC2_HOST }} 'bash ~/deploy.sh'
 
       - name: 🔔 Notify deployment success
         run: |
