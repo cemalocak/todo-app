@@ -1,0 +1,1467 @@
+<testsuites id="" name="" tests="45" failures="35" skipped="0" errors="0" time="64.501505">
+<testsuite name="todo.spec.js" timestamp="2025-07-22T16:24:24.736Z" hostname="chromium" tests="9" failures="7" skipped="0" time="72.874" errors="0">
+<testcase name="Todo App E2E Tests › User Story: Add &quot;süt al&quot; and see it in the list" classname="todo.spec.js" time="7.132">
+<failure message="todo.spec.js:13:2 User Story: Add &quot;süt al&quot; and see it in the list" type="FAILURE">
+<![CDATA[  [chromium] › todo.spec.js:13:2 › Todo App E2E Tests › User Story: Add "süt al" and see it in the list 
+
+    Error: Timed out 5000ms waiting for expect(page).toHaveTitle(expected)
+
+    Expected pattern: /Todo App/
+    Received string:  "Vite + React"
+    Call log:
+      - Expect "toHaveTitle" with timeout 5000ms
+        9 × unexpected value "Vite + React"
+
+
+      13 | 	test('User Story: Add "süt al" and see it in the list', async ({ page }) => {
+      14 | 		// Given: User is on the todo app page
+    > 15 | 		await expect(page).toHaveTitle(/Todo App/);
+         | 		                   ^
+      16 |
+      17 | 		// When: User types "süt al" in the input
+      18 | 		await page.fill('[data-testid="todo-input"]', 'süt al');
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:15:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Multiple todos are displayed correctly" classname="todo.spec.js" time="12.408">
+<failure message="todo.spec.js:30:2 Multiple todos are displayed correctly" type="FAILURE">
+<![CDATA[  [chromium] › todo.spec.js:30:2 › Todo App E2E Tests › Multiple todos are displayed correctly ─────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      33 |
+      34 | 		for (const todo of todos) {
+    > 35 | 			await page.fill('[data-testid="todo-input"]', todo);
+         | 			           ^
+      36 | 			await page.click('[data-testid="add-button"]');
+      37 | 		}
+      38 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:35:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Empty state is shown correctly" classname="todo.spec.js" time="7.242">
+<failure message="todo.spec.js:49:2 Empty state is shown correctly" type="FAILURE">
+<![CDATA[  [chromium] › todo.spec.js:49:2 › Todo App E2E Tests › Empty state is shown correctly ─────────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+    Locator: locator('[data-testid="empty-state"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-testid="empty-state"]')
+
+
+      49 | 	test('Empty state is shown correctly', async ({ page }) => {
+      50 | 		// Check empty state message
+    > 51 | 		await expect(page.locator('[data-testid="empty-state"]')).toBeVisible();
+         | 		                                                          ^
+      52 | 		await expect(page.locator('[data-testid="empty-state"]')).toContainText('No todos yet');
+      53 | 	});
+      54 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:51:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Todo CRUD operations work correctly" classname="todo.spec.js" time="12.304">
+<failure message="todo.spec.js:55:2 Todo CRUD operations work correctly" type="FAILURE">
+<![CDATA[  [chromium] › todo.spec.js:55:2 › Todo App E2E Tests › Todo CRUD operations work correctly ────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      55 | 	test('Todo CRUD operations work correctly', async ({ page }) => {
+      56 | 		// Create
+    > 57 | 		await page.fill('[data-testid="todo-input"]', 'Test todo');
+         | 		           ^
+      58 | 		await page.click('[data-testid="add-button"]');
+      59 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
+      60 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:57:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › API integration works correctly" classname="todo.spec.js" time="3.477">
+</testcase>
+<testcase name="Todo App E2E Tests › App is responsive on mobile" classname="todo.spec.js" time="12.929">
+<failure message="todo.spec.js:81:2 App is responsive on mobile" type="FAILURE">
+<![CDATA[  [chromium] › todo.spec.js:81:2 › Todo App E2E Tests › App is responsive on mobile ────────────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      84 |
+      85 | 		// Check if app is still functional
+    > 86 | 		await page.fill('[data-testid="todo-input"]', 'Mobile todo');
+         | 		           ^
+      87 | 		await page.click('[data-testid="add-button"]');
+      88 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Mobile todo');
+      89 | 	});
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:86:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › App handles network errors gracefully" classname="todo.spec.js" time="10.722">
+<failure message="todo.spec.js:91:2 App handles network errors gracefully" type="FAILURE">
+<![CDATA[  [chromium] › todo.spec.js:91:2 › Todo App E2E Tests › App handles network errors gracefully ──────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      94 |
+      95 | 		// Try to add a todo
+    > 96 | 		await page.fill('[data-testid="todo-input"]', 'Network test');
+         | 		           ^
+      97 | 		await page.click('[data-testid="add-button"]');
+      98 |
+      99 | 		// Should show error message (if implemented)
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:96:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Performance: App loads quickly" classname="todo.spec.js" time="1.033">
+</testcase>
+<testcase name="Todo App E2E Tests › Accessibility: Basic a11y checks" classname="todo.spec.js" time="5.627">
+<failure message="todo.spec.js:113:2 Accessibility: Basic a11y checks" type="FAILURE">
+<![CDATA[  [chromium] › todo.spec.js:113:2 › Todo App E2E Tests › Accessibility: Basic a11y checks ──────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toHaveAttribute()
+
+    Locator: locator('[data-testid="todo-input"]')
+    Expected: have attribute
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      113 | 	test('Accessibility: Basic a11y checks', async ({ page }) => {
+      114 | 		// Check for basic accessibility features
+    > 115 | 		await expect(page.locator('[data-testid="todo-input"]')).toHaveAttribute('aria-label');
+          | 		                                                         ^
+      116 | 		await expect(page.locator('[data-testid="add-button"]')).toHaveAttribute('aria-label');
+      117 |
+      118 | 		// Check for proper heading structure
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:115:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="todo.spec.js" timestamp="2025-07-22T16:24:24.736Z" hostname="firefox" tests="9" failures="7" skipped="0" time="67.178" errors="0">
+<testcase name="Todo App E2E Tests › User Story: Add &quot;süt al&quot; and see it in the list" classname="todo.spec.js" time="6.372">
+<failure message="todo.spec.js:13:2 User Story: Add &quot;süt al&quot; and see it in the list" type="FAILURE">
+<![CDATA[  [firefox] › todo.spec.js:13:2 › Todo App E2E Tests › User Story: Add "süt al" and see it in the list 
+
+    Error: Timed out 5000ms waiting for expect(page).toHaveTitle(expected)
+
+    Expected pattern: /Todo App/
+    Received string:  "Vite + React"
+    Call log:
+      - Expect "toHaveTitle" with timeout 5000ms
+        9 × unexpected value "Vite + React"
+
+
+      13 | 	test('User Story: Add "süt al" and see it in the list', async ({ page }) => {
+      14 | 		// Given: User is on the todo app page
+    > 15 | 		await expect(page).toHaveTitle(/Todo App/);
+         | 		                   ^
+      16 |
+      17 | 		// When: User types "süt al" in the input
+      18 | 		await page.fill('[data-testid="todo-input"]', 'süt al');
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:15:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-firefox/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Multiple todos are displayed correctly" classname="todo.spec.js" time="11.656">
+<failure message="todo.spec.js:30:2 Multiple todos are displayed correctly" type="FAILURE">
+<![CDATA[  [firefox] › todo.spec.js:30:2 › Todo App E2E Tests › Multiple todos are displayed correctly ──────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      33 |
+      34 | 		for (const todo of todos) {
+    > 35 | 			await page.fill('[data-testid="todo-input"]', todo);
+         | 			           ^
+      36 | 			await page.click('[data-testid="add-button"]');
+      37 | 		}
+      38 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:35:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-firefox/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Empty state is shown correctly" classname="todo.spec.js" time="6.736">
+<failure message="todo.spec.js:49:2 Empty state is shown correctly" type="FAILURE">
+<![CDATA[  [firefox] › todo.spec.js:49:2 › Todo App E2E Tests › Empty state is shown correctly ──────────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+    Locator: locator('[data-testid="empty-state"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-testid="empty-state"]')
+
+
+      49 | 	test('Empty state is shown correctly', async ({ page }) => {
+      50 | 		// Check empty state message
+    > 51 | 		await expect(page.locator('[data-testid="empty-state"]')).toBeVisible();
+         | 		                                                          ^
+      52 | 		await expect(page.locator('[data-testid="empty-state"]')).toContainText('No todos yet');
+      53 | 	});
+      54 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:51:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-firefox/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Todo CRUD operations work correctly" classname="todo.spec.js" time="11.893">
+<failure message="todo.spec.js:55:2 Todo CRUD operations work correctly" type="FAILURE">
+<![CDATA[  [firefox] › todo.spec.js:55:2 › Todo App E2E Tests › Todo CRUD operations work correctly ─────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      55 | 	test('Todo CRUD operations work correctly', async ({ page }) => {
+      56 | 		// Create
+    > 57 | 		await page.fill('[data-testid="todo-input"]', 'Test todo');
+         | 		           ^
+      58 | 		await page.click('[data-testid="add-button"]');
+      59 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
+      60 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:57:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-firefox/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › API integration works correctly" classname="todo.spec.js" time="1.802">
+</testcase>
+<testcase name="Todo App E2E Tests › App is responsive on mobile" classname="todo.spec.js" time="11.718">
+<failure message="todo.spec.js:81:2 App is responsive on mobile" type="FAILURE">
+<![CDATA[  [firefox] › todo.spec.js:81:2 › Todo App E2E Tests › App is responsive on mobile ─────────────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      84 |
+      85 | 		// Check if app is still functional
+    > 86 | 		await page.fill('[data-testid="todo-input"]', 'Mobile todo');
+         | 		           ^
+      87 | 		await page.click('[data-testid="add-button"]');
+      88 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Mobile todo');
+      89 | 	});
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:86:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-firefox/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › App handles network errors gracefully" classname="todo.spec.js" time="10.278">
+<failure message="todo.spec.js:91:2 App handles network errors gracefully" type="FAILURE">
+<![CDATA[  [firefox] › todo.spec.js:91:2 › Todo App E2E Tests › App handles network errors gracefully ───────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      94 |
+      95 | 		// Try to add a todo
+    > 96 | 		await page.fill('[data-testid="todo-input"]', 'Network test');
+         | 		           ^
+      97 | 		await page.click('[data-testid="add-button"]');
+      98 |
+      99 | 		// Should show error message (if implemented)
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:96:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-firefox/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Performance: App loads quickly" classname="todo.spec.js" time="1.388">
+</testcase>
+<testcase name="Todo App E2E Tests › Accessibility: Basic a11y checks" classname="todo.spec.js" time="5.335">
+<failure message="todo.spec.js:113:2 Accessibility: Basic a11y checks" type="FAILURE">
+<![CDATA[  [firefox] › todo.spec.js:113:2 › Todo App E2E Tests › Accessibility: Basic a11y checks ───────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toHaveAttribute()
+
+    Locator: locator('[data-testid="todo-input"]')
+    Expected: have attribute
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      113 | 	test('Accessibility: Basic a11y checks', async ({ page }) => {
+      114 | 		// Check for basic accessibility features
+    > 115 | 		await expect(page.locator('[data-testid="todo-input"]')).toHaveAttribute('aria-label');
+          | 		                                                         ^
+      116 | 		await expect(page.locator('[data-testid="add-button"]')).toHaveAttribute('aria-label');
+      117 |
+      118 | 		// Check for proper heading structure
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:115:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-firefox/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="todo.spec.js" timestamp="2025-07-22T16:24:24.736Z" hostname="webkit" tests="9" failures="7" skipped="0" time="59.809" errors="0">
+<testcase name="Todo App E2E Tests › User Story: Add &quot;süt al&quot; and see it in the list" classname="todo.spec.js" time="5.873">
+<failure message="todo.spec.js:13:2 User Story: Add &quot;süt al&quot; and see it in the list" type="FAILURE">
+<![CDATA[  [webkit] › todo.spec.js:13:2 › Todo App E2E Tests › User Story: Add "süt al" and see it in the list 
+
+    Error: Timed out 5000ms waiting for expect(page).toHaveTitle(expected)
+
+    Expected pattern: /Todo App/
+    Received string:  "Vite + React"
+    Call log:
+      - Expect "toHaveTitle" with timeout 5000ms
+        8 × unexpected value "Vite + React"
+
+
+      13 | 	test('User Story: Add "süt al" and see it in the list', async ({ page }) => {
+      14 | 		// Given: User is on the todo app page
+    > 15 | 		await expect(page).toHaveTitle(/Todo App/);
+         | 		                   ^
+      16 |
+      17 | 		// When: User types "süt al" in the input
+      18 | 		await page.fill('[data-testid="todo-input"]', 'süt al');
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:15:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-webkit/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Multiple todos are displayed correctly" classname="todo.spec.js" time="10.479">
+<failure message="todo.spec.js:30:2 Multiple todos are displayed correctly" type="FAILURE">
+<![CDATA[  [webkit] › todo.spec.js:30:2 › Todo App E2E Tests › Multiple todos are displayed correctly ───────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      33 |
+      34 | 		for (const todo of todos) {
+    > 35 | 			await page.fill('[data-testid="todo-input"]', todo);
+         | 			           ^
+      36 | 			await page.click('[data-testid="add-button"]');
+      37 | 		}
+      38 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:35:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-webkit/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Empty state is shown correctly" classname="todo.spec.js" time="5.481">
+<failure message="todo.spec.js:49:2 Empty state is shown correctly" type="FAILURE">
+<![CDATA[  [webkit] › todo.spec.js:49:2 › Todo App E2E Tests › Empty state is shown correctly ───────────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+    Locator: locator('[data-testid="empty-state"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-testid="empty-state"]')
+
+
+      49 | 	test('Empty state is shown correctly', async ({ page }) => {
+      50 | 		// Check empty state message
+    > 51 | 		await expect(page.locator('[data-testid="empty-state"]')).toBeVisible();
+         | 		                                                          ^
+      52 | 		await expect(page.locator('[data-testid="empty-state"]')).toContainText('No todos yet');
+      53 | 	});
+      54 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:51:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-webkit/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Todo CRUD operations work correctly" classname="todo.spec.js" time="10.451">
+<failure message="todo.spec.js:55:2 Todo CRUD operations work correctly" type="FAILURE">
+<![CDATA[  [webkit] › todo.spec.js:55:2 › Todo App E2E Tests › Todo CRUD operations work correctly ──────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      55 | 	test('Todo CRUD operations work correctly', async ({ page }) => {
+      56 | 		// Create
+    > 57 | 		await page.fill('[data-testid="todo-input"]', 'Test todo');
+         | 		           ^
+      58 | 		await page.click('[data-testid="add-button"]');
+      59 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
+      60 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:57:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-webkit/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › API integration works correctly" classname="todo.spec.js" time="0.443">
+</testcase>
+<testcase name="Todo App E2E Tests › App is responsive on mobile" classname="todo.spec.js" time="10.448">
+<failure message="todo.spec.js:81:2 App is responsive on mobile" type="FAILURE">
+<![CDATA[  [webkit] › todo.spec.js:81:2 › Todo App E2E Tests › App is responsive on mobile ──────────────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      84 |
+      85 | 		// Check if app is still functional
+    > 86 | 		await page.fill('[data-testid="todo-input"]', 'Mobile todo');
+         | 		           ^
+      87 | 		await page.click('[data-testid="add-button"]');
+      88 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Mobile todo');
+      89 | 	});
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:86:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-webkit/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › App handles network errors gracefully" classname="todo.spec.js" time="10.305">
+<failure message="todo.spec.js:91:2 App handles network errors gracefully" type="FAILURE">
+<![CDATA[  [webkit] › todo.spec.js:91:2 › Todo App E2E Tests › App handles network errors gracefully ────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      94 |
+      95 | 		// Try to add a todo
+    > 96 | 		await page.fill('[data-testid="todo-input"]', 'Network test');
+         | 		           ^
+      97 | 		await page.click('[data-testid="add-button"]');
+      98 |
+      99 | 		// Should show error message (if implemented)
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:96:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-webkit/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Performance: App loads quickly" classname="todo.spec.js" time="0.934">
+</testcase>
+<testcase name="Todo App E2E Tests › Accessibility: Basic a11y checks" classname="todo.spec.js" time="5.395">
+<failure message="todo.spec.js:113:2 Accessibility: Basic a11y checks" type="FAILURE">
+<![CDATA[  [webkit] › todo.spec.js:113:2 › Todo App E2E Tests › Accessibility: Basic a11y checks ────────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toHaveAttribute()
+
+    Locator: locator('[data-testid="todo-input"]')
+    Expected: have attribute
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      113 | 	test('Accessibility: Basic a11y checks', async ({ page }) => {
+      114 | 		// Check for basic accessibility features
+    > 115 | 		await expect(page.locator('[data-testid="todo-input"]')).toHaveAttribute('aria-label');
+          | 		                                                         ^
+      116 | 		await expect(page.locator('[data-testid="add-button"]')).toHaveAttribute('aria-label');
+      117 |
+      118 | 		// Check for proper heading structure
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:115:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-webkit/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="todo.spec.js" timestamp="2025-07-22T16:24:24.736Z" hostname="Mobile Chrome" tests="9" failures="7" skipped="0" time="64.452" errors="0">
+<testcase name="Todo App E2E Tests › User Story: Add &quot;süt al&quot; and see it in the list" classname="todo.spec.js" time="6.247">
+<failure message="todo.spec.js:13:2 User Story: Add &quot;süt al&quot; and see it in the list" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › todo.spec.js:13:2 › Todo App E2E Tests › User Story: Add "süt al" and see it in the list 
+
+    Error: Timed out 5000ms waiting for expect(page).toHaveTitle(expected)
+
+    Expected pattern: /Todo App/
+    Received string:  "Vite + React"
+    Call log:
+      - Expect "toHaveTitle" with timeout 5000ms
+        9 × unexpected value "Vite + React"
+
+
+      13 | 	test('User Story: Add "süt al" and see it in the list', async ({ page }) => {
+      14 | 		// Given: User is on the todo app page
+    > 15 | 		await expect(page).toHaveTitle(/Todo App/);
+         | 		                   ^
+      16 |
+      17 | 		// When: User types "süt al" in the input
+      18 | 		await page.fill('[data-testid="todo-input"]', 'süt al');
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:15:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Multiple todos are displayed correctly" classname="todo.spec.js" time="10.94">
+<failure message="todo.spec.js:30:2 Multiple todos are displayed correctly" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › todo.spec.js:30:2 › Todo App E2E Tests › Multiple todos are displayed correctly 
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      33 |
+      34 | 		for (const todo of todos) {
+    > 35 | 			await page.fill('[data-testid="todo-input"]', todo);
+         | 			           ^
+      36 | 			await page.click('[data-testid="add-button"]');
+      37 | 		}
+      38 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:35:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Empty state is shown correctly" classname="todo.spec.js" time="5.999">
+<failure message="todo.spec.js:49:2 Empty state is shown correctly" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › todo.spec.js:49:2 › Todo App E2E Tests › Empty state is shown correctly ────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+    Locator: locator('[data-testid="empty-state"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-testid="empty-state"]')
+
+
+      49 | 	test('Empty state is shown correctly', async ({ page }) => {
+      50 | 		// Check empty state message
+    > 51 | 		await expect(page.locator('[data-testid="empty-state"]')).toBeVisible();
+         | 		                                                          ^
+      52 | 		await expect(page.locator('[data-testid="empty-state"]')).toContainText('No todos yet');
+      53 | 	});
+      54 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:51:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Todo CRUD operations work correctly" classname="todo.spec.js" time="11.074">
+<failure message="todo.spec.js:55:2 Todo CRUD operations work correctly" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › todo.spec.js:55:2 › Todo App E2E Tests › Todo CRUD operations work correctly ───
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      55 | 	test('Todo CRUD operations work correctly', async ({ page }) => {
+      56 | 		// Create
+    > 57 | 		await page.fill('[data-testid="todo-input"]', 'Test todo');
+         | 		           ^
+      58 | 		await page.click('[data-testid="add-button"]');
+      59 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
+      60 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:57:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › API integration works correctly" classname="todo.spec.js" time="0.845">
+</testcase>
+<testcase name="Todo App E2E Tests › App is responsive on mobile" classname="todo.spec.js" time="11.67">
+<failure message="todo.spec.js:81:2 App is responsive on mobile" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › todo.spec.js:81:2 › Todo App E2E Tests › App is responsive on mobile ───────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      84 |
+      85 | 		// Check if app is still functional
+    > 86 | 		await page.fill('[data-testid="todo-input"]', 'Mobile todo');
+         | 		           ^
+      87 | 		await page.click('[data-testid="add-button"]');
+      88 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Mobile todo');
+      89 | 	});
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:86:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › App handles network errors gracefully" classname="todo.spec.js" time="11.206">
+<failure message="todo.spec.js:91:2 App handles network errors gracefully" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › todo.spec.js:91:2 › Todo App E2E Tests › App handles network errors gracefully ─
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      94 |
+      95 | 		// Try to add a todo
+    > 96 | 		await page.fill('[data-testid="todo-input"]', 'Network test');
+         | 		           ^
+      97 | 		await page.click('[data-testid="add-button"]');
+      98 |
+      99 | 		// Should show error message (if implemented)
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:96:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Performance: App loads quickly" classname="todo.spec.js" time="0.963">
+</testcase>
+<testcase name="Todo App E2E Tests › Accessibility: Basic a11y checks" classname="todo.spec.js" time="5.508">
+<failure message="todo.spec.js:113:2 Accessibility: Basic a11y checks" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › todo.spec.js:113:2 › Todo App E2E Tests › Accessibility: Basic a11y checks ─────
+
+    Error: Timed out 5000ms waiting for expect(locator).toHaveAttribute()
+
+    Locator: locator('[data-testid="todo-input"]')
+    Expected: have attribute
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      113 | 	test('Accessibility: Basic a11y checks', async ({ page }) => {
+      114 | 		// Check for basic accessibility features
+    > 115 | 		await expect(page.locator('[data-testid="todo-input"]')).toHaveAttribute('aria-label');
+          | 		                                                         ^
+      116 | 		await expect(page.locator('[data-testid="add-button"]')).toHaveAttribute('aria-label');
+      117 |
+      118 | 		// Check for proper heading structure
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:115:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="todo.spec.js" timestamp="2025-07-22T16:24:24.736Z" hostname="Mobile Safari" tests="9" failures="7" skipped="0" time="59.086" errors="0">
+<testcase name="Todo App E2E Tests › User Story: Add &quot;süt al&quot; and see it in the list" classname="todo.spec.js" time="5.394">
+<failure message="todo.spec.js:13:2 User Story: Add &quot;süt al&quot; and see it in the list" type="FAILURE">
+<![CDATA[  [Mobile Safari] › todo.spec.js:13:2 › Todo App E2E Tests › User Story: Add "süt al" and see it in the list 
+
+    Error: Timed out 5000ms waiting for expect(page).toHaveTitle(expected)
+
+    Expected pattern: /Todo App/
+    Received string:  "Vite + React"
+    Call log:
+      - Expect "toHaveTitle" with timeout 5000ms
+        9 × unexpected value "Vite + React"
+
+
+      13 | 	test('User Story: Add "süt al" and see it in the list', async ({ page }) => {
+      14 | 		// Given: User is on the todo app page
+    > 15 | 		await expect(page).toHaveTitle(/Todo App/);
+         | 		                   ^
+      16 |
+      17 | 		// When: User types "süt al" in the input
+      18 | 		await page.fill('[data-testid="todo-input"]', 'süt al');
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:15:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Us-22aca-t-al-and-see-it-in-the-list-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Multiple todos are displayed correctly" classname="todo.spec.js" time="10.402">
+<failure message="todo.spec.js:30:2 Multiple todos are displayed correctly" type="FAILURE">
+<![CDATA[  [Mobile Safari] › todo.spec.js:30:2 › Todo App E2E Tests › Multiple todos are displayed correctly 
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      33 |
+      34 | 		for (const todo of todos) {
+    > 35 | 			await page.fill('[data-testid="todo-input"]', todo);
+         | 			           ^
+      36 | 			await page.click('[data-testid="add-button"]');
+      37 | 		}
+      38 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:35:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Mu-0e46c-dos-are-displayed-correctly-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Empty state is shown correctly" classname="todo.spec.js" time="5.409">
+<failure message="todo.spec.js:49:2 Empty state is shown correctly" type="FAILURE">
+<![CDATA[  [Mobile Safari] › todo.spec.js:49:2 › Todo App E2E Tests › Empty state is shown correctly ────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+    Locator: locator('[data-testid="empty-state"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-testid="empty-state"]')
+
+
+      49 | 	test('Empty state is shown correctly', async ({ page }) => {
+      50 | 		// Check empty state message
+    > 51 | 		await expect(page.locator('[data-testid="empty-state"]')).toBeVisible();
+         | 		                                                          ^
+      52 | 		await expect(page.locator('[data-testid="empty-state"]')).toContainText('No todos yet');
+      53 | 	});
+      54 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:51:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Empty-state-is-shown-correctly-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Todo CRUD operations work correctly" classname="todo.spec.js" time="10.415">
+<failure message="todo.spec.js:55:2 Todo CRUD operations work correctly" type="FAILURE">
+<![CDATA[  [Mobile Safari] › todo.spec.js:55:2 › Todo App E2E Tests › Todo CRUD operations work correctly ───
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      55 | 	test('Todo CRUD operations work correctly', async ({ page }) => {
+      56 | 		// Create
+    > 57 | 		await page.fill('[data-testid="todo-input"]', 'Test todo');
+         | 		           ^
+      58 | 		await page.click('[data-testid="add-button"]');
+      59 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
+      60 |
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:57:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › API integration works correctly" classname="todo.spec.js" time="0.455">
+</testcase>
+<testcase name="Todo App E2E Tests › App is responsive on mobile" classname="todo.spec.js" time="10.309">
+<failure message="todo.spec.js:81:2 App is responsive on mobile" type="FAILURE">
+<![CDATA[  [Mobile Safari] › todo.spec.js:81:2 › Todo App E2E Tests › App is responsive on mobile ───────────
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      84 |
+      85 | 		// Check if app is still functional
+    > 86 | 		await page.fill('[data-testid="todo-input"]', 'Mobile todo');
+         | 		           ^
+      87 | 		await page.click('[data-testid="add-button"]');
+      88 | 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Mobile todo');
+      89 | 	});
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:86:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › App handles network errors gracefully" classname="todo.spec.js" time="10.472">
+<failure message="todo.spec.js:91:2 App handles network errors gracefully" type="FAILURE">
+<![CDATA[  [Mobile Safari] › todo.spec.js:91:2 › Todo App E2E Tests › App handles network errors gracefully ─
+
+    TimeoutError: page.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      94 |
+      95 | 		// Try to add a todo
+    > 96 | 		await page.fill('[data-testid="todo-input"]', 'Network test');
+         | 		           ^
+      97 | 		await page.click('[data-testid="add-button"]');
+      98 |
+      99 | 		// Should show error message (if implemented)
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:96:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Ap-33154-s-network-errors-gracefully-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Todo App E2E Tests › Performance: App loads quickly" classname="todo.spec.js" time="0.969">
+</testcase>
+<testcase name="Todo App E2E Tests › Accessibility: Basic a11y checks" classname="todo.spec.js" time="5.261">
+<failure message="todo.spec.js:113:2 Accessibility: Basic a11y checks" type="FAILURE">
+<![CDATA[  [Mobile Safari] › todo.spec.js:113:2 › Todo App E2E Tests › Accessibility: Basic a11y checks ─────
+
+    Error: Timed out 5000ms waiting for expect(locator).toHaveAttribute()
+
+    Locator: locator('[data-testid="todo-input"]')
+    Expected: have attribute
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('[data-testid="todo-input"]')
+
+
+      113 | 	test('Accessibility: Basic a11y checks', async ({ page }) => {
+      114 | 		// Check for basic accessibility features
+    > 115 | 		await expect(page.locator('[data-testid="todo-input"]')).toHaveAttribute('aria-label');
+          | 		                                                         ^
+      116 | 		await expect(page.locator('[data-testid="add-button"]')).toHaveAttribute('aria-label');
+      117 |
+      118 | 		// Check for proper heading structure
+        at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:115:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
