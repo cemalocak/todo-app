@@ -28,7 +28,7 @@ test.describe('Todo App CRUD Tests', () => {
 	});
 
 	test.beforeEach(async ({ page }) => {
-		await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+		await page.goto(BASE_URL, { waitUntil: 'load' });
 		await waitForPageLoad(page);
 		console.log('🧪 Yeni CRUD testi başlıyor...');
 	});
