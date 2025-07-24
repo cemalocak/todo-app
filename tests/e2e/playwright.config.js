@@ -7,13 +7,13 @@ const { defineConfig, devices } = require('@playwright/test');
 module.exports = defineConfig({
 	testDir: './',
 	/* Run tests in files in parallel */
-	fullyParallel: false, // paralel çalışmayı kapatıyoruz
+	fullyParallel: false,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
 	forbidOnly: !!process.env.CI,
 	/* Retry on CI only */
 	retries: process.env.CI ? 2 : 0,
 	/* Opt out of parallel tests on CI. */
-	workers: 1, // worker sayısını 1'e indiriyoruz
+	workers: 1,
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
 	reporter: [
 		['html'],
@@ -23,7 +23,9 @@ module.exports = defineConfig({
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
-		baseURL: process.env.TEST_URL || 'http://localhost:3001',
+		baseURL: process.env.CI
+			? 'http://todo-frontend-test:80'
+			: (process.env.TEST_URL || 'http://localhost:3001'),
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'on-first-retry',
