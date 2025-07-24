@@ -3,7 +3,7 @@ package service
 import (
 	"fmt"
 	"strings"
-	
+
 	"todo-app/internal/model"
 	"todo-app/internal/repository"
 )
@@ -26,7 +26,7 @@ func (s *TodoService) CreateTodo(text string) (*model.Todo, error) {
 	if strings.TrimSpace(text) == "" {
 		return nil, fmt.Errorf("text cannot be empty")
 	}
-	
+
 	todo := &model.Todo{
 		Text: text,
 	}
@@ -49,7 +49,7 @@ func (s *TodoService) UpdateTodo(id int, text string) (*model.Todo, error) {
 	if strings.TrimSpace(text) == "" {
 		return nil, fmt.Errorf("text cannot be empty")
 	}
-	
+
 	// First, check if todo exists
 	existingTodo, err := s.repo.GetByID(id)
 	if err != nil {
@@ -64,9 +64,9 @@ func (s *TodoService) UpdateTodo(id int, text string) (*model.Todo, error) {
 // DeleteTodo deletes a todo item by ID
 func (s *TodoService) DeleteTodo(id int) error {
 	return s.repo.Delete(id)
-} 
+}
 
-// TruncateTodos removes all todos (for testing only)
+// TruncateTodos removes all todos from the test database
 func (s *TodoService) TruncateTodos() error {
-	return s.repo.Truncate()
+	return s.repo.TruncateTodos()
 }

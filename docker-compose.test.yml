@@ -1,0 +1,49 @@
+services:
+  # Backend service (Go API) - Test Environment
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    container_name: todo-backend-test
+    restart: unless-stopped
+    ports:
+      - "8081:8080"  # Test ortamı için farklı port
+    environment:
+      DB_PATH: "todos_test.db"
+      PORT: "8080"
+      ENV: "test"
+    volumes:
+      - ./todos_test.db:/app/todos_test.db
+    networks:
+      - todo-network-test
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/api/todos"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Frontend service (React + Nginx) - Test Environment
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    container_name: todo-frontend-test
+    restart: unless-stopped
+    ports:
+      - "3001:80"  # Test ortamı için farklı port
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - todo-network-test
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+networks:
+  todo-network-test:
+    driver: bridge 

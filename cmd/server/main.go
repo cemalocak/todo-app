@@ -22,7 +22,7 @@ func main() {
 	case "production":
 		defaultDBPath = "/data/todos.db"
 	case "test":
-		defaultDBPath = ":memory:" // In-memory database for tests
+		defaultDBPath = "todos_e2e_test.db" // E2E testleri için ayrı DB
 	default: // development
 		defaultDBPath = "todos_dev.db"
 	}
@@ -58,7 +58,7 @@ func main() {
 	fmt.Printf("🚀 Server starting on http://localhost%s\n", serverPort)
 	fmt.Printf("📝 API: http://localhost%s/api/todos\n", serverPort)
 	fmt.Printf("🌐 Frontend: http://localhost%s\n", serverPort)
-	fmt.Printf("💾 Database: %s\n", dbPath)
+	fmt.Printf("💾 Database: %s (Environment: %s)\n", dbPath, env)
 
 	log.Fatal(http.ListenAndServe(serverPort, mux))
 }

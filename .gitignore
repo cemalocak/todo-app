@@ -4,6 +4,8 @@
 *.db-wal
 *.db-shm
 todos*.db
+todos_*.db
+todos_e2e_test.db
 
 # Binaries
 /main
@@ -67,3 +69,4 @@ tests/e2e/playwright-report/data/
 tests/e2e/test-results/**/*
 tests/e2e/playwright-report/**/*
 tests/e2e/playwright-report/data/**/*
+tests/e2e/playwright-report/test-results/**/*

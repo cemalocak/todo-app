@@ -2,18 +2,19 @@ package repository
 
 import (
 	"fmt"
+	"os"
 	"time"
 	"todo-app/internal/model"
 )
 
-// TodoRepository defines the interface for todo data operations
+// TodoRepository defines the interface for todo storage operations
 type TodoRepository interface {
 	Create(todo *model.Todo) (*model.Todo, error)
 	GetByID(id int) (*model.Todo, error)
 	GetAll() ([]*model.Todo, error)
 	Update(todo *model.Todo) (*model.Todo, error)
 	Delete(id int) error
-	Truncate() error
+	TruncateTodos() error // Test veritabanını temizlemek için
 }
 
 // InMemoryTodoRepository implements TodoRepository using in-memory storage
@@ -89,5 +90,15 @@ func (r *InMemoryTodoRepository) Delete(id int) error {
 // Truncate removes all todos from the repository
 func (r *InMemoryTodoRepository) Truncate() error {
 	r.todos = make([]*model.Todo, 0)
+	return nil
+}
+
+// TruncateTodos removes all todos from the in-memory repository
+func (r *InMemoryTodoRepository) TruncateTodos() error {
+	if os.Getenv("ENV") != "test" {
+		return fmt.Errorf("TruncateTodos can only be called in test environment")
+	}
+	r.todos = make([]*model.Todo, 0)
+	r.nextID = 1
 	return nil
 }
