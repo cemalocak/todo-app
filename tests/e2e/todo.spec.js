@@ -1,14 +1,8 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-// Test environment URLs - CI/CD ortamında container isimleri kullanılır
-const BASE_URL = process.env.CI
-	? 'http://todo-frontend-test:80'
-	: (process.env.TEST_URL || 'http://localhost:3001');
-
-const API_URL = process.env.CI
-	? 'http://todo-backend-test:8080'
-	: 'http://localhost:8081';
+// Test environment URL
+const BASE_URL = process.env.TEST_URL || 'http://localhost:3000';
 
 // Test veritabanını temizleme fonksiyonu
 async function clearTestDatabase(page) {
