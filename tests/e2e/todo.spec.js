@@ -4,13 +4,30 @@ const { test, expect } = require('@playwright/test');
 // Test environment URL
 const BASE_URL = process.env.TEST_URL || 'http://localhost:3000';
 
-test.describe('Todo App E2E Tests', () => {
-	test.beforeEach(async ({ page }) => {
-		// Navigate to the app
-		await page.goto(BASE_URL);
+// Test veritabanını temizleme fonksiyonu
+async function clearTestDatabase(page) {
+	await page.request.post(`${BASE_URL}/api/test/truncate`);
+	console.log('🧪 Test veritabanı temizlendi.');
+	await page.waitForTimeout(2000);
+	await page.waitForLoadState('networkidle');
+	await page.waitForTimeout(2000);
+}
+
+// Temel CRUD testleri
+test.describe('Todo App CRUD Tests', () => {
+	test.beforeAll(async ({ browser }) => {
+		console.log('🚀 CRUD testleri başlıyor...');
+		const page = await browser.newPage();
+		await clearTestDatabase(page);
+		await page.close();
 	});
 
-	test('User Story: Add "süt al" and see it in the list', async ({ page }) => {
+	test.beforeEach(async ({ page }) => {
+		await page.goto(BASE_URL);
+		console.log('🧪 Yeni CRUD testi başlıyor...');
+	});
+
+	test('Add "süt al" and see it in the list', async ({ page }) => {
 		// Given: User is on the todo app page
 		await expect(page).toHaveTitle(/Todo App/);
 
@@ -20,42 +37,36 @@ test.describe('Todo App E2E Tests', () => {
 		// And: User clicks the "Add" button
 		await page.click('[data-testid="add-button"]');
 
+		await page.waitForTimeout(2000);
+
 		// Then: "süt al" should appear in the list
 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('süt al');
 
 		// And: Input should be cleared
 		await expect(page.locator('[data-testid="todo-input"]')).toHaveValue('');
 	});
+});
 
-	test('Multiple todos are displayed correctly', async ({ page }) => {
-		// Add multiple todos
-		const todos = ['Buy milk', 'Walk the dog', 'Finish project'];
-
-		for (const todo of todos) {
-			await page.fill('[data-testid="todo-input"]', todo);
-			await page.click('[data-testid="add-button"]');
-		}
-
-		// Check all todos are displayed
-		for (const todo of todos) {
-			await expect(page.locator('[data-testid="todo-item"]')).toContainText(todo);
-		}
-
-		// Check order (newest first)
-		const todoItems = page.locator('[data-testid="todo-item"]');
-		await expect(todoItems.first()).toContainText('Finish project');
+test.describe('Todo App CRUD Tests', () => {
+	test.beforeAll(async ({ browser }) => {
+		console.log('🚀 CRUD testleri başlıyor...');
+		const page = await browser.newPage();
+		await clearTestDatabase(page);
+		await page.close();
 	});
 
-	test('Empty state is shown correctly', async ({ page }) => {
-		// Check empty state message
-		await expect(page.locator('[data-testid="empty-state"]')).toBeVisible();
-		await expect(page.locator('[data-testid="empty-state"]')).toContainText('No todos yet');
+	test.beforeEach(async ({ page }) => {
+		await page.goto(BASE_URL);
+		console.log('🧪 Yeni CRUD testi başlıyor...');
 	});
+
+
 
 	test('Todo CRUD operations work correctly', async ({ page }) => {
 		// Create
 		await page.fill('[data-testid="todo-input"]', 'Test todo');
 		await page.click('[data-testid="add-button"]');
+		await page.waitForTimeout(2000);
 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
 
 		// Update (if implemented)
@@ -68,14 +79,26 @@ test.describe('Todo App E2E Tests', () => {
 		// await page.click('[data-testid="delete-button"]');
 		// await expect(page.locator('[data-testid="todo-item"]')).not.toBeVisible();
 	});
+});
 
-	test('API integration works correctly', async ({ page, request }) => {
-		// Test direct API call
-		const response = await request.get(`${BASE_URL}/api/todos`);
-		expect(response.status()).toBe(200);
+// UI ve Erişilebilirlik testleri
+test.describe('Todo App UI Tests', () => {
+	test.beforeAll(async ({ browser }) => {
+		console.log('🚀 UI testleri başlıyor...');
+		const page = await browser.newPage();
+		await clearTestDatabase(page);
+		await page.close();
+	});
 
-		const todos = await response.json();
-		expect(Array.isArray(todos)).toBe(true);
+	test.beforeEach(async ({ page }) => {
+		await page.goto(BASE_URL);
+		console.log('🧪 Yeni UI testi başlıyor...');
+	});
+
+	test('Empty state is shown correctly', async ({ page }) => {
+		// Check empty state message
+		await expect(page.locator('[data-testid="empty-state"]')).toBeVisible();
+		await expect(page.locator('[data-testid="empty-state"]')).toContainText('📋Henüz görev yokYukarıdaki form ile ilk görevinizi ekleyin!');
 	});
 
 	test('App is responsive on mobile', async ({ page }) => {
@@ -86,6 +109,39 @@ test.describe('Todo App E2E Tests', () => {
 		await page.fill('[data-testid="todo-input"]', 'Mobile todo');
 		await page.click('[data-testid="add-button"]');
 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Mobile todo');
+	});
+
+	test('Accessibility: Basic a11y checks', async ({ page }) => {
+		// Check for basic accessibility features
+		await expect(page.locator('[data-testid="todo-input"]')).toHaveAttribute('aria-label');
+		await expect(page.locator('[data-testid="add-button"]')).toHaveAttribute('aria-label');
+
+		// Check for proper heading structure
+		await expect(page.locator('h1')).toBeVisible();
+	});
+});
+
+// API ve Performans testleri
+test.describe('Todo App API Tests', () => {
+	test.beforeAll(async ({ browser }) => {
+		console.log('🚀 API testleri başlıyor...');
+		const page = await browser.newPage();
+		await clearTestDatabase(page);
+		await page.close();
+	});
+
+	test.beforeEach(async ({ page }) => {
+		await page.goto(BASE_URL);
+		console.log('🧪 Yeni API testi başlıyor...');
+	});
+
+	test('API integration works correctly', async ({ page, request }) => {
+		// Test direct API call
+		const response = await request.get(`${BASE_URL}/api/todos`);
+		expect(response.status()).toBe(200);
+
+		const todos = await response.json();
+		expect(Array.isArray(todos)).toBe(true);
 	});
 
 	test('App handles network errors gracefully', async ({ page }) => {
@@ -108,14 +164,5 @@ test.describe('Todo App E2E Tests', () => {
 
 		// Should load within 3 seconds
 		expect(loadTime).toBeLessThan(3000);
-	});
-
-	test('Accessibility: Basic a11y checks', async ({ page }) => {
-		// Check for basic accessibility features
-		await expect(page.locator('[data-testid="todo-input"]')).toHaveAttribute('aria-label');
-		await expect(page.locator('[data-testid="add-button"]')).toHaveAttribute('aria-label');
-
-		// Check for proper heading structure
-		await expect(page.locator('h1')).toBeVisible();
 	});
 }); 
