@@ -127,14 +127,44 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-          # Deploy to test environment
-          ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_HOST }} '
-            cd ~/todo-app
-            export PATH="/usr/local/bin:$PATH"
-            export BACKEND_IMAGE=ghcr.io/${{ github.repository }}-backend:latest
-            export FRONTEND_IMAGE=ghcr.io/${{ github.repository }}-frontend:latest
-            ~/todo-app/deploy.sh || echo "Deploy script not found, running manual commands"
-          '
+          # Create test deployment script
+          cat > deploy-test.sh << 'EOF'
+          #!/bin/bash
+          set -e
+
+          echo "🚀 Starting test deployment..."
+
+          # Login to GitHub Container Registry
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+          # Stop existing test containers
+          docker-compose -f docker-compose.test.yml down --remove-orphans || true
+
+          # Force remove test containers if they still exist
+          docker stop todo-backend-test todo-frontend-test || true
+          docker rm todo-backend-test todo-frontend-test || true
+
+          # Clean up test networks
+          docker network rm todo-network-test || true
+
+          # Pull latest images
+          docker pull ghcr.io/${{ github.repository }}-backend:latest
+          docker pull ghcr.io/${{ github.repository }}-frontend:latest
+
+          # Start test containers
+          docker-compose -f docker-compose.test.yml up -d
+
+          # Health check
+          sleep 30
+          curl -f http://localhost:8081/api/todos || exit 1
+
+          echo "✅ Test deployment completed successfully!"
+          EOF
+
+          # Execute deployment on EC2
+          scp deploy-test.sh ec2-user@${{ secrets.EC2_HOST }}:~/todo-app/
+          scp docker-compose.test.yml ec2-user@${{ secrets.EC2_HOST }}:~/todo-app/
+          ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_HOST }} 'cd ~/todo-app && bash deploy-test.sh'
 
   # 🧪 API Contract Tests (Optional)
   api-tests:
