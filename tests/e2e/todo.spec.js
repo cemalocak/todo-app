@@ -2,7 +2,7 @@
 const { test, expect } = require('@playwright/test');
 
 // Test environment URL
-const BASE_URL = process.env.TEST_UI_URL || 'http://localhost:3000';
+const BASE_URL = process.env.TEST_UI_URL || 'http://localhost:3001';
 const API_URL = process.env.TEST_API_URL || 'http://localhost:8081';
 
 // Test veritabanını temizleme fonksiyonu
