@@ -216,11 +216,13 @@ jobs:
 
       - name: 📊 Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: web/playwright-report/
           retention-days: 30
+          compression-level: 9 # Maximum compression
+          overwrite: true # Overwrite existing artifacts
 
   # 🚀 Deploy to Production
   deploy-prod:
