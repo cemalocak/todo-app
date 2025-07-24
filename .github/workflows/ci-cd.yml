@@ -208,6 +208,9 @@ jobs:
           npm run build
           cd ..
 
+          # Print frontend URL for test environment
+          echo "🌐 Frontend URL: ${{ secrets.TEST_API_URL }}"
+
           # Install Playwright dependencies
           cd tests/e2e
           npm init -y
