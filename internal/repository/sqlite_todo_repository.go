@@ -182,3 +182,9 @@ func (r *SQLiteTodoRepository) DBPath() string {
 func (r *SQLiteTodoRepository) Close() error {
 	return r.db.Close()
 }
+
+func (r *SQLiteTodoRepository) Truncate() error {
+	query := `DELETE FROM todos`
+	_, err := r.db.Exec(query)
+	return err
+}

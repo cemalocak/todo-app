@@ -13,6 +13,7 @@ type TodoRepository interface {
 	GetAll() ([]*model.Todo, error)
 	Update(todo *model.Todo) (*model.Todo, error)
 	Delete(id int) error
+	Truncate() error
 }
 
 // InMemoryTodoRepository implements TodoRepository using in-memory storage
@@ -83,4 +84,4 @@ func (r *InMemoryTodoRepository) Delete(id int) error {
 		}
 	}
 	return fmt.Errorf("todo with id %d not found", id)
-} 
+}

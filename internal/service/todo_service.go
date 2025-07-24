@@ -65,3 +65,8 @@ func (s *TodoService) UpdateTodo(id int, text string) (*model.Todo, error) {
 func (s *TodoService) DeleteTodo(id int) error {
 	return s.repo.Delete(id)
 } 
+
+// TruncateTodos removes all todos (for testing only)
+func (s *TodoService) TruncateTodos() error {
+	return s.repo.Truncate()
+}

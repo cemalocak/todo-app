@@ -58,7 +58,7 @@ func (h *TodoHandler) CreateTodo(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated) // 201
-	json.NewEncoder(w).Encode(todo) // struct'ı json'a çevir
+	json.NewEncoder(w).Encode(todo)   // struct'ı json'a çevir
 }
 
 // GetTodoByID handles GET /api/todos/{id}
@@ -157,4 +157,13 @@ func (h *TodoHandler) DeleteTodo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusNoContent) // 204 No Content for successful deletion
-} 
+}
+
+// TruncateTodos handles removing all todos (for testing only)
+func (h *TodoHandler) TruncateTodos(w http.ResponseWriter, r *http.Request) {
+	if err := h.service.TruncateTodos(); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}

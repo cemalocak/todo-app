@@ -11,10 +11,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DB_PATH=/data/todos.db
-      - PORT=8080
-    volumes:
-      - todo_data:/data
+      DB_PATH: ":memory:"
+      PORT: "8080"
+      ENV: "test"
     networks:
       - todo-network
     healthcheck:
@@ -44,11 +43,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-
-# Named volumes for data persistence
-volumes:
-  todo_data:
-    driver: local
 
 # Network for service communication
 networks:

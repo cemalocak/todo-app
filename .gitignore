@@ -61,3 +61,9 @@ temp/
 
 # Docker volumes data
 data/ 
+tests/e2e/test-results/
+tests/e2e/playwright-report/
+tests/e2e/playwright-report/data/
+tests/e2e/test-results/**/*
+tests/e2e/playwright-report/**/*
+tests/e2e/playwright-report/data/**/*
