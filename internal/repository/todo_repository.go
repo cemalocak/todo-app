@@ -85,3 +85,9 @@ func (r *InMemoryTodoRepository) Delete(id int) error {
 	}
 	return fmt.Errorf("todo with id %d not found", id)
 }
+
+// Truncate removes all todos from the repository
+func (r *InMemoryTodoRepository) Truncate() error {
+	r.todos = make([]*model.Todo, 0)
+	return nil
+}
