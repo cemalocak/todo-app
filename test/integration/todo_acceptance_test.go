@@ -68,8 +68,8 @@ func TestGetTodoByID_UserStory(t *testing.T) {
 	require.NoError(t, err)
 	assert.Equal(t, http.StatusOK, getResp.StatusCode)
 	
-	var fetchedTodo map[string]interface{}
-	json.NewDecoder(getResp.Body).Decode(&fetchedTodo)
+	var fetchedTodo map[string]interface{} // key string olacak value herhangi bir veri tipi
+	json.NewDecoder(getResp.Body).Decode(&fetchedTodo) // & işareti pointer olarak alır
 	assert.Equal(t, "test todo", fetchedTodo["text"])
 	assert.Equal(t, float64(todoID), fetchedTodo["id"])
 }
