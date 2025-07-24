@@ -2,11 +2,12 @@
 const { test, expect } = require('@playwright/test');
 
 // Test environment URL
-const BASE_URL = process.env.TEST_URL || 'http://localhost:3000';
+const BASE_URL = process.env.TEST_UI_URL || 'http://localhost:3000';
+const API_URL = process.env.TEST_API_URL || 'http://localhost:8081';
 
 // Test veritabanını temizleme fonksiyonu
 async function clearTestDatabase(page) {
-	await page.request.post(`${BASE_URL}/api/test/truncate`);
+	await page.request.post(`${API_URL}/api/test/truncate`);
 	console.log('🧪 Test veritabanı temizlendi.');
 	await page.waitForTimeout(2000);
 	await page.waitForLoadState('networkidle');
@@ -137,7 +138,7 @@ test.describe('Todo App API Tests', () => {
 
 	test('API integration works correctly', async ({ page, request }) => {
 		// Test direct API call
-		const response = await request.get(`${BASE_URL}/api/todos`);
+		const response = await request.get(`${API_URL}/api/todos`);
 		expect(response.status()).toBe(200);
 
 		const todos = await response.json();

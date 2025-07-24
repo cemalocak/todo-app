@@ -186,7 +186,8 @@ jobs:
 
       - name: 🎭 Run E2E Tests
         env:
-          TEST_URL: ${{ secrets.TEST_API_URL }}
+          TEST_API_URL: ${{ secrets.TEST_API_URL }}
+          TEST_UI_URL: ${{ secrets.TEST_UI_URL }}
         run: |
           # Wait for deployment to stabilize
           echo "⏳ Waiting for deployment to stabilize..."
