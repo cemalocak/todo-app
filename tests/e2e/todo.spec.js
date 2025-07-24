@@ -10,8 +10,12 @@ async function clearTestDatabase(page) {
 	await page.request.post(`${API_URL}/api/test/truncate`);
 	console.log('🧪 Test veritabanı temizlendi.');
 	await page.waitForTimeout(2000);
+}
+
+// Sayfanın yüklenmesini bekle
+async function waitForPageLoad(page) {
 	await page.waitForLoadState('networkidle');
-	await page.waitForTimeout(2000);
+	console.log('📱 Sayfa yüklendi ve hazır.');
 }
 
 // Temel CRUD testleri
@@ -24,7 +28,8 @@ test.describe('Todo App CRUD Tests', () => {
 	});
 
 	test.beforeEach(async ({ page }) => {
-		await page.goto(BASE_URL);
+		await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+		await waitForPageLoad(page);
 		console.log('🧪 Yeni CRUD testi başlıyor...');
 	});
 

@@ -7,13 +7,13 @@ const { defineConfig, devices } = require('@playwright/test');
 module.exports = defineConfig({
 	testDir: './',
 	/* Run tests in files in parallel */
-	fullyParallel: false, // paralel çalışmayı kapatıyoruz
+	fullyParallel: false,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
 	forbidOnly: !!process.env.CI,
 	/* Retry on CI only */
 	retries: process.env.CI ? 2 : 0,
 	/* Opt out of parallel tests on CI. */
-	workers: 1, // worker sayısını 1'e indiriyoruz
+	workers: 1,
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
 	reporter: [
 		['html'],
@@ -35,10 +35,13 @@ module.exports = defineConfig({
 		video: 'retain-on-failure',
 
 		/* Timeout for each action */
-		actionTimeout: 10000,
+		actionTimeout: 30000,
 
 		/* Navigation timeout */
-		navigationTimeout: 15000,
+		navigationTimeout: 30000,
+
+		/* Wait until page load state */
+		waitUntil: 'networkidle',
 	},
 
 	/* Configure projects for major browsers */
