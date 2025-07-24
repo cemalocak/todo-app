@@ -61,7 +61,7 @@
     "version": "1.54.1",
     "workers": 6,
     "webServer": {
-      "command": "cd ../../ && docker-compose -f docker-compose.test.yml up -d && sleep 10",
+      "command": "cd ../../ && docker-compose -f docker-compose.test.yml up -d",
       "url": "http://localhost:3001",
       "timeout": 120000,
       "reuseExistingServer": true
@@ -78,7 +78,7 @@
         {
           "title": "Todo App E2E Tests",
           "file": "todo.spec.js",
-          "line": 8,
+          "line": 7,
           "column": 6,
           "specs": [
             {
@@ -97,25 +97,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 10793,
+                      "duration": 10395,
                       "error": {
-                        "message": "Error: \u001b[31mTimed out 10000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\nExpected string: \u001b[32m\"süt al\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\u001b[22m\n",
-                        "stack": "Error: \u001b[31mTimed out 10000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\nExpected string: \u001b[32m\"süt al\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\u001b[22m\n\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:36:48",
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:31:14",
                         "location": {
                           "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
-                          "column": 48,
-                          "line": 36
+                          "column": 14,
+                          "line": 31
                         },
-                        "snippet": "\u001b[0m \u001b[90m 34 |\u001b[39m \t\t\u001b[90m// Then: \"süt al\" should appear in the list\u001b[39m\n \u001b[90m 35 |\u001b[39m \t\t\u001b[36mconst\u001b[39m todoItem \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-item\"]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(todoItem\u001b[33m.\u001b[39mlocator(\u001b[32m'.todo-text'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'süt al'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m\n \u001b[90m 38 |\u001b[39m \t\t\u001b[90m// And: Input should be cleared\u001b[39m\n \u001b[90m 39 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-input\"]'\u001b[39m))\u001b[33m.\u001b[39mtoHaveValue(\u001b[32m''\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 29 |\u001b[39m\n \u001b[90m 30 |\u001b[39m \t\t\u001b[90m// And: User clicks the \"Add\" button\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 31 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"add-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 32 |\u001b[39m\n \u001b[90m 33 |\u001b[39m \t\t\u001b[90m// Then: \"süt al\" should appear in the list\u001b[39m\n \u001b[90m 34 |\u001b[39m \t\t\u001b[90m// Use first() since we know it's the only item and should be at the top\u001b[39m\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
-                            "column": 48,
-                            "line": 36
+                            "column": 14,
+                            "line": 31
                           },
-                          "message": "Error: \u001b[31mTimed out 10000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\nExpected string: \u001b[32m\"süt al\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\u001b[22m\n\n\n\u001b[0m \u001b[90m 34 |\u001b[39m \t\t\u001b[90m// Then: \"süt al\" should appear in the list\u001b[39m\n \u001b[90m 35 |\u001b[39m \t\t\u001b[36mconst\u001b[39m todoItem \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-item\"]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(todoItem\u001b[33m.\u001b[39mlocator(\u001b[32m'.todo-text'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'süt al'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m\n \u001b[90m 38 |\u001b[39m \t\t\u001b[90m// And: Input should be cleared\u001b[39m\n \u001b[90m 39 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-input\"]'\u001b[39m))\u001b[33m.\u001b[39mtoHaveValue(\u001b[32m''\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:36:48\u001b[22m"
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 29 |\u001b[39m\n \u001b[90m 30 |\u001b[39m \t\t\u001b[90m// And: User clicks the \"Add\" button\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 31 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"add-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 32 |\u001b[39m\n \u001b[90m 33 |\u001b[39m \t\t\u001b[90m// Then: \"süt al\" should appear in the list\u001b[39m\n \u001b[90m 34 |\u001b[39m \t\t\u001b[90m// Use first() since we know it's the only item and should be at the top\u001b[39m\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:31:14\u001b[22m"
                         }
                       ],
                       "stdout": [],
@@ -125,7 +125,7 @@
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:43.743Z",
+                      "startTime": "2025-07-24T09:58:29.491Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -146,8 +146,8 @@
                       ],
                       "errorLocation": {
                         "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
-                        "column": 48,
-                        "line": 36
+                        "column": 14,
+                        "line": 31
                       }
                     }
                   ],
@@ -156,7 +156,7 @@
               ],
               "id": "486a7bbfb15f2ca1070b-82f8c4f59f0286b4922d",
               "file": "todo.spec.js",
-              "line": 24,
+              "line": 23,
               "column": 2
             },
             {
@@ -175,12 +175,16 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 524,
+                      "duration": 324,
                       "errors": [],
                       "stdout": [],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "Failed to truncate test database: database is locked (5) (SQLITE_BUSY)\n\n"
+                        }
+                      ],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:43.752Z",
+                      "startTime": "2025-07-24T09:58:29.488Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -195,7 +199,7 @@
             },
             {
               "title": "Todo CRUD operations work correctly",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -208,22 +212,58 @@
                     {
                       "workerIndex": 2,
                       "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 1145,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [
+                      "status": "failed",
+                      "duration": 10402,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:51:14",
+                        "location": {
+                          "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                          "column": 14,
+                          "line": 51
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 49 |\u001b[39m \t\t\u001b[90m// Create\u001b[39m\n \u001b[90m 50 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'[data-testid=\"todo-input\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Test todo'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 51 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"add-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 52 |\u001b[39m\n \u001b[90m 53 |\u001b[39m \t\t\u001b[90m// Get the first todo item since we know it's the only one\u001b[39m\n \u001b[90m 54 |\u001b[39m \t\t\u001b[36mconst\u001b[39m todoItem \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-item\"]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
                         {
-                          "text": "Failed to truncate test database: database is locked (5) (SQLITE_BUSY)\n\n"
+                          "location": {
+                            "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                            "column": 14,
+                            "line": 51
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 49 |\u001b[39m \t\t\u001b[90m// Create\u001b[39m\n \u001b[90m 50 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'[data-testid=\"todo-input\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Test todo'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 51 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"add-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 52 |\u001b[39m\n \u001b[90m 53 |\u001b[39m \t\t\u001b[90m// Get the first todo item since we know it's the only one\u001b[39m\n \u001b[90m 54 |\u001b[39m \t\t\u001b[36mconst\u001b[39m todoItem \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-item\"]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:51:14\u001b[22m"
                         }
                       ],
+                      "stdout": [],
+                      "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:43.750Z",
+                      "startTime": "2025-07-24T09:58:29.493Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-Todo-CRUD-operations-work-correctly-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                        "column": 14,
+                        "line": 51
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "486a7bbfb15f2ca1070b-3ce8342bb30fc97280f0",
@@ -247,12 +287,16 @@
                       "workerIndex": 3,
                       "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 479,
+                      "duration": 324,
                       "errors": [],
                       "stdout": [],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "Failed to truncate test database: database is locked (5) (SQLITE_BUSY)\n\n"
+                        }
+                      ],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:43.744Z",
+                      "startTime": "2025-07-24T09:58:29.481Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -267,7 +311,7 @@
             },
             {
               "title": "App is responsive on mobile",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -280,18 +324,58 @@
                     {
                       "workerIndex": 4,
                       "parallelIndex": 4,
-                      "status": "passed",
-                      "duration": 639,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 10392,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:84:14",
+                        "location": {
+                          "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                          "column": 14,
+                          "line": 84
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 82 |\u001b[39m \t\t\u001b[90m// Check if app is still functional\u001b[39m\n \u001b[90m 83 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'[data-testid=\"todo-input\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Mobile todo'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 84 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"add-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m \t\t\u001b[90m// Check the first (and only) todo item\u001b[39m\n \u001b[90m 87 |\u001b[39m \t\t\u001b[36mconst\u001b[39m todoItem \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-item\"]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                            "column": 14,
+                            "line": 84
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 82 |\u001b[39m \t\t\u001b[90m// Check if app is still functional\u001b[39m\n \u001b[90m 83 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'[data-testid=\"todo-input\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Mobile todo'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 84 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"add-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m \t\t\u001b[90m// Check the first (and only) todo item\u001b[39m\n \u001b[90m 87 |\u001b[39m \t\t\u001b[36mconst\u001b[39m todoItem \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-item\"]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:84:14\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:43.744Z",
+                      "startTime": "2025-07-24T09:58:29.480Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-App-is-responsive-on-mobile-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                        "column": 14,
+                        "line": 84
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "486a7bbfb15f2ca1070b-4da2a5ca418e7743797d",
@@ -301,7 +385,7 @@
             },
             {
               "title": "Accessibility: Basic a11y checks",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -314,9 +398,28 @@
                     {
                       "workerIndex": 5,
                       "parallelIndex": 5,
-                      "status": "passed",
-                      "duration": 523,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 5429,
+                      "error": {
+                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"add-button\"]')\nExpected string: \u001b[32m\"Add todo button\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n",
+                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"add-button\"]')\nExpected string: \u001b[32m\"Add todo button\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:94:60",
+                        "location": {
+                          "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                          "column": 60,
+                          "line": 94
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 92 |\u001b[39m \t\t\u001b[90m// Check for basic accessibility features\u001b[39m\n \u001b[90m 93 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-input\"]'\u001b[39m))\u001b[33m.\u001b[39mtoHaveAttribute(\u001b[32m'aria-label'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Todo text input'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 94 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"add-button\"]'\u001b[39m))\u001b[33m.\u001b[39mtoHaveAttribute(\u001b[32m'aria-label'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Add todo button'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t                                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 95 |\u001b[39m\n \u001b[90m 96 |\u001b[39m \t\t\u001b[90m// Check for proper heading structure\u001b[39m\n \u001b[90m 97 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'h2'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'Görevler'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                            "column": 60,
+                            "line": 94
+                          },
+                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"add-button\"]')\nExpected string: \u001b[32m\"Add todo button\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"add-button\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 92 |\u001b[39m \t\t\u001b[90m// Check for basic accessibility features\u001b[39m\n \u001b[90m 93 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-input\"]'\u001b[39m))\u001b[33m.\u001b[39mtoHaveAttribute(\u001b[32m'aria-label'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Todo text input'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 94 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"add-button\"]'\u001b[39m))\u001b[33m.\u001b[39mtoHaveAttribute(\u001b[32m'aria-label'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Add todo button'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t                                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 95 |\u001b[39m\n \u001b[90m 96 |\u001b[39m \t\t\u001b[90m// Check for proper heading structure\u001b[39m\n \u001b[90m 97 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'h2'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'Görevler'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js:94:60\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [
                         {
@@ -324,12 +427,33 @@
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:43.746Z",
+                      "startTime": "2025-07-24T09:58:29.491Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-E2E-Tests-Accessibility-Basic-a11y-checks-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.js",
+                        "column": 60,
+                        "line": 94
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "486a7bbfb15f2ca1070b-3e9864f566eed674444a",
@@ -356,7 +480,7 @@
           "specs": [
             {
               "title": "should add a new todo",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -369,23 +493,63 @@
                     {
                       "workerIndex": 3,
                       "parallelIndex": 3,
-                      "status": "passed",
-                      "duration": 352,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 339,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"New Todo Item\"\u001b[39m\nReceived: \u001b[31m\"New Todo Item\u001b[7m#2✏️ Düzenle🗑️ Sil\u001b[27m\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"New Todo Item\"\u001b[39m\nReceived: \u001b[31m\"New Todo Item\u001b[7m#2✏️ Düzenle🗑️ Sil\u001b[27m\"\u001b[39m\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts:15:20",
+                        "location": {
+                          "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
+                          "column": 20,
+                          "line": 15
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 13 |\u001b[39m \t\t\u001b[90m// Verify todo is added\u001b[39m\n \u001b[90m 14 |\u001b[39m \t\t\u001b[36mconst\u001b[39m todoText \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mtextContent(\u001b[32m'[data-testid=\"todo-item\"]:first-child'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 15 |\u001b[39m \t\texpect(todoText)\u001b[33m.\u001b[39mtoBe(\u001b[32m'New Todo Item'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 16 |\u001b[39m \t})\u001b[33m;\u001b[39m\n \u001b[90m 17 |\u001b[39m\n \u001b[90m 18 |\u001b[39m \ttest(\u001b[32m'should edit a todo'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
+                            "column": 20,
+                            "line": 15
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"New Todo Item\"\u001b[39m\nReceived: \u001b[31m\"New Todo Item\u001b[7m#2✏️ Düzenle🗑️ Sil\u001b[27m\"\u001b[39m\n\n\u001b[0m \u001b[90m 13 |\u001b[39m \t\t\u001b[90m// Verify todo is added\u001b[39m\n \u001b[90m 14 |\u001b[39m \t\t\u001b[36mconst\u001b[39m todoText \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mtextContent(\u001b[32m'[data-testid=\"todo-item\"]:first-child'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 15 |\u001b[39m \t\texpect(todoText)\u001b[33m.\u001b[39mtoBe(\u001b[32m'New Todo Item'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 16 |\u001b[39m \t})\u001b[33m;\u001b[39m\n \u001b[90m 17 |\u001b[39m\n \u001b[90m 18 |\u001b[39m \ttest(\u001b[32m'should edit a todo'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts:15:20\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:44.550Z",
+                      "startTime": "2025-07-24T09:58:29.978Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-should-add-a-new-todo-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-should-add-a-new-todo-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-should-add-a-new-todo-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
+                        "column": 20,
+                        "line": 15
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "7c2290300587baf0dfac-e367c5d27609745b377f",
               "file": "todo.spec.ts",
-              "line": 18,
+              "line": 8,
               "column": 6
             },
             {
@@ -404,31 +568,31 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "failed",
-                      "duration": 5513,
+                      "duration": 10437,
                       "error": {
-                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\nExpected string: \u001b[32m\"Edited Todo\"\u001b[39m\nReceived string: \u001b[31m\"Todo to Edit\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\u001b[22m\n\u001b[2m    7 × locator resolved to <span class=\"todo-text\">Todo to Edit</span>\u001b[22m\n\u001b[2m      - unexpected value \"Todo to Edit\"\u001b[22m\n",
-                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\nExpected string: \u001b[32m\"Edited Todo\"\u001b[39m\nReceived string: \u001b[31m\"Todo to Edit\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\u001b[22m\n\u001b[2m    7 × locator resolved to <span class=\"todo-text\">Todo to Edit</span>\u001b[22m\n\u001b[2m      - unexpected value \"Todo to Edit\"\u001b[22m\n\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts:40:48",
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"edit-button\"]:first-child')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"edit-button\"]:first-child')\u001b[22m\n\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts:24:14",
                         "location": {
                           "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
-                          "column": 48,
-                          "line": 40
+                          "column": 14,
+                          "line": 24
                         },
-                        "snippet": "\u001b[0m \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m \t\t\u001b[90m// Verify todo is edited\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 40 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(todoItem\u001b[33m.\u001b[39mlocator(\u001b[32m'.todo-text'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'Edited Todo'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 41 |\u001b[39m \t})\u001b[33m;\u001b[39m\n \u001b[90m 42 |\u001b[39m\n \u001b[90m 43 |\u001b[39m \ttest(\u001b[32m'should delete a todo'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 22 |\u001b[39m\n \u001b[90m 23 |\u001b[39m \t\t\u001b[90m// Edit the todo\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 24 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"edit-button\"]:first-child'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 25 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'[data-testid=\"edit-input\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Edited Todo'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 26 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"save-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
-                            "column": 48,
-                            "line": 40
+                            "column": 14,
+                            "line": 24
                           },
-                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\nExpected string: \u001b[32m\"Edited Todo\"\u001b[39m\nReceived string: \u001b[31m\"Todo to Edit\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"todo-item\"]').first().locator('.todo-text')\u001b[22m\n\u001b[2m    7 × locator resolved to <span class=\"todo-text\">Todo to Edit</span>\u001b[22m\n\u001b[2m      - unexpected value \"Todo to Edit\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m \t\t\u001b[90m// Verify todo is edited\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 40 |\u001b[39m \t\t\u001b[36mawait\u001b[39m expect(todoItem\u001b[33m.\u001b[39mlocator(\u001b[32m'.todo-text'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'Edited Todo'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 41 |\u001b[39m \t})\u001b[33m;\u001b[39m\n \u001b[90m 42 |\u001b[39m\n \u001b[90m 43 |\u001b[39m \ttest(\u001b[32m'should delete a todo'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts:40:48\u001b[22m"
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"edit-button\"]:first-child')\u001b[22m\n\n\n\u001b[0m \u001b[90m 22 |\u001b[39m\n \u001b[90m 23 |\u001b[39m \t\t\u001b[90m// Edit the todo\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 24 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"edit-button\"]:first-child'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 25 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'[data-testid=\"edit-input\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Edited Todo'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 26 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"save-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts:24:14\u001b[22m"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:44.597Z",
+                      "startTime": "2025-07-24T09:58:29.979Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -449,8 +613,8 @@
                       ],
                       "errorLocation": {
                         "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
-                        "column": 48,
-                        "line": 40
+                        "column": 14,
+                        "line": 24
                       }
                     }
                   ],
@@ -459,12 +623,12 @@
               ],
               "id": "7c2290300587baf0dfac-52facf8dfe85cc84437d",
               "file": "todo.spec.ts",
-              "line": 28,
+              "line": 18,
               "column": 6
             },
             {
               "title": "should delete a todo",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -475,29 +639,65 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "passed",
-                      "duration": 425,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [
+                      "workerIndex": 6,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 10439,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"delete-button\"]:first-child')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"delete-button\"]:first-child')\u001b[22m\n\n    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts:42:14",
+                        "location": {
+                          "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
+                          "column": 14,
+                          "line": 42
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m \t\t\u001b[90m// Delete the todo\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"delete-button\"]:first-child'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 43 |\u001b[39m\n \u001b[90m 44 |\u001b[39m \t\t\u001b[90m// Verify todo is deleted\u001b[39m\n \u001b[90m 45 |\u001b[39m \t\t\u001b[36mconst\u001b[39m finalCount \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-item\"]'\u001b[39m)\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
                         {
-                          "text": "Failed to truncate test database: database is locked (5) (SQLITE_BUSY)\n\n"
+                          "location": {
+                            "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
+                            "column": 14,
+                            "line": 42
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"delete-button\"]:first-child')\u001b[22m\n\n\n\u001b[0m \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m \t\t\u001b[90m// Delete the todo\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 |\u001b[39m \t\t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"delete-button\"]:first-child'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t\t           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 43 |\u001b[39m\n \u001b[90m 44 |\u001b[39m \t\t\u001b[90m// Verify todo is deleted\u001b[39m\n \u001b[90m 45 |\u001b[39m \t\t\u001b[36mconst\u001b[39m finalCount \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"todo-item\"]'\u001b[39m)\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts:42:14\u001b[22m"
                         }
                       ],
+                      "stdout": [],
+                      "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-24T10:25:44.600Z",
+                      "startTime": "2025-07-24T09:58:30.634Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-should-delete-a-todo-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-should-delete-a-todo-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/test-results/todo-Todo-App-should-delete-a-todo-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/cemalocak/Desktop/case study/todo-app/tests/e2e/todo.spec.ts",
+                        "column": 14,
+                        "line": 42
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "7c2290300587baf0dfac-fdc799b07416e97b6d1f",
               "file": "todo.spec.ts",
-              "line": 43,
+              "line": 33,
               "column": 6
             }
           ]
@@ -507,11 +707,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-07-24T10:25:43.336Z",
-    "duration": 11546.777,
-    "expected": 7,
+    "startTime": "2025-07-24T09:58:29.078Z",
+    "duration": 12102.287999999999,
+    "expected": 2,
     "skipped": 0,
-    "unexpected": 2,
+    "unexpected": 7,
     "flaky": 0
   }
 }

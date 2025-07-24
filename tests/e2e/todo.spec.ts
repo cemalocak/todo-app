@@ -1,17 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Todo App', () => {
-	test.beforeEach(async ({ page, request }) => {
-		// Clear test database before each test
-		try {
-			const response = await request.post('/api/test/truncate');
-			if (!response.ok()) {
-				console.warn('Failed to truncate test database:', await response.text());
-			}
-		} catch (error) {
-			console.warn('Error truncating test database:', error.message);
-		}
-
+	test.beforeEach(async ({ page }) => {
 		await page.goto('/');
 	});
 
@@ -21,36 +11,38 @@ test.describe('Todo App', () => {
 		await page.click('[data-testid="add-todo-button"]');
 
 		// Verify todo is added
-		const todoItem = page.locator('[data-testid="todo-item"]').first();
-		await expect(todoItem.locator('.todo-text')).toContainText('New Todo Item');
+		const todoText = await page.textContent('[data-testid="todo-item"]:first-child');
+		expect(todoText).toBe('New Todo Item');
 	});
 
 	test('should edit a todo', async ({ page }) => {
-		// Add a todo to edit
+		// Add a todo first
 		await page.fill('[data-testid="todo-input"]', 'Todo to Edit');
 		await page.click('[data-testid="add-todo-button"]');
 
 		// Edit the todo
-		const todoItem = page.locator('[data-testid="todo-item"]').first();
-		await todoItem.locator('[data-testid="edit-button"]').click();
+		await page.click('[data-testid="edit-button"]:first-child');
 		await page.fill('[data-testid="edit-input"]', 'Edited Todo');
 		await page.click('[data-testid="save-button"]');
 
 		// Verify todo is edited
-		await expect(todoItem.locator('.todo-text')).toContainText('Edited Todo');
+		const todoText = await page.textContent('[data-testid="todo-item"]:first-child');
+		expect(todoText).toBe('Edited Todo');
 	});
 
 	test('should delete a todo', async ({ page }) => {
-		// Add a todo to delete
+		// Add a todo first
 		await page.fill('[data-testid="todo-input"]', 'Todo to Delete');
 		await page.click('[data-testid="add-todo-button"]');
 
+		// Get initial todo count
+		const initialCount = await page.locator('[data-testid="todo-item"]').count();
+
 		// Delete the todo
-		const todoItem = page.locator('[data-testid="todo-item"]').first();
-		await todoItem.locator('[data-testid="delete-button"]').click();
+		await page.click('[data-testid="delete-button"]:first-child');
 
 		// Verify todo is deleted
 		const finalCount = await page.locator('[data-testid="todo-item"]').count();
-		expect(finalCount).toBe(0);
+		expect(finalCount).toBe(initialCount - 1);
 	});
 }); 
