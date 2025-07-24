@@ -32,7 +32,7 @@ function TodoForm({ onAddTodo, disabled }) {
 					type="submit"
 					className="add-btn"
 					disabled={disabled || !inputValue.trim()}
-					data-testid="add-button"
+					data-testid="add-todo-button"
 					aria-label="Add todo button"
 				>
 					<span>Ekle</span>

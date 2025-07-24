@@ -65,12 +65,14 @@ function TodoList({ todos, loading, onUpdateTodo, onDeleteTodo }) {
 										value={editingText}
 										onChange={(e) => setEditingText(e.target.value)}
 										className="edit-input"
+										data-testid="edit-input"
 										autoFocus
 									/>
 									<div className="edit-actions">
 										<button
 											onClick={() => handleEditSave(todo.id)}
 											className="save-btn"
+											data-testid="save-button"
 											aria-label="Kaydet"
 											disabled={!editingText.trim()}
 										>
@@ -96,6 +98,7 @@ function TodoList({ todos, loading, onUpdateTodo, onDeleteTodo }) {
 										<button
 											onClick={() => handleEditStart(todo)}
 											className="edit-btn"
+											data-testid="edit-button"
 											aria-label="Düzenle"
 										>
 											✏️ Düzenle
@@ -103,6 +106,7 @@ function TodoList({ todos, loading, onUpdateTodo, onDeleteTodo }) {
 										<button
 											onClick={() => handleDelete(todo.id)}
 											className="delete-btn"
+											data-testid="delete-button"
 											aria-label="Sil"
 										>
 											🗑️ Sil
