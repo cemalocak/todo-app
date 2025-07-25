@@ -75,15 +75,15 @@ test.describe('Todo App CRUD Tests', () => {
 		await page.waitForTimeout(2000);
 		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
 
-		// Update (if implemented)
-		// await page.click('[data-testid="edit-button"]');
-		// await page.fill('[data-testid="edit-input"]', 'Updated todo');
-		// await page.click('[data-testid="save-button"]');
-		// await expect(page.locator('[data-testid="todo-item"]')).toContainText('Updated todo');
+		// Update 
+		await page.click('[data-testid="edit-button"]');
+		await page.fill('[data-testid="edit-input"]', 'Updated todo');
+		await page.click('[data-testid="save-button"]');
+		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Updated todo');
 
-		// Delete (if implemented)
-		// await page.click('[data-testid="delete-button"]');
-		// await expect(page.locator('[data-testid="todo-item"]')).not.toBeVisible();
+		// Delete 
+		await page.click('[data-testid="delete-button"]');
+		await expect(page.locator('[data-testid="todo-item"]')).not.toBeVisible();
 	});
 });
 

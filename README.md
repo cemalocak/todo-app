@@ -1,36 +1,101 @@
-# ToDo List Application
+<div align="center">
+  
+![Todo App Logo](docs/images/wq_logo.svg)
 
-## Project Description
-A modern web-based ToDo list application built with Go backend and vanilla JavaScript frontend, following Test-Driven Development (TDD) and Acceptance Test-Driven Design (A-TDD) practices.
+# Todo App: Modern Web Application with Test-Driven Development
 
-## Features
-- ✅ Add new todo items
-- ✅ View todo list
-- ✅ Persistent data storage
-- ✅ RESTful API
-- ✅ Responsive web interface
+[![CI/CD Status](https://github.com/cemalocak/todo-app/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/cemalocak/todo-app/actions)
+[![Test Coverage](https://codecov.io/gh/cemalocak/todo-app/branch/main/graph/badge.svg)](https://codecov.io/gh/cemalocak/todo-app)
+[![Go Report Card](https://goreportcard.com/badge/github.com/cemalocak/todo-app)](https://goreportcard.com/report/github.com/cemalocak/todo-app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Technology Stack
+</div>
 
-### Backend
-- **Language**: Go 1.24.5
-- **Framework**: Standard library + Gorilla Mux (to be added)
-- **Database**: SQLite (for simplicity, production-ready)
-- **Testing**: Go testing package + Testify
+## Development Process with TDD
 
-### Frontend
-- **HTML5** + **CSS3** + **Vanilla JavaScript**
-- **No framework** (keeping it simple)
+This project was developed using the principles of Test-Driven Development (TDD) and Acceptance Test-Driven Development (ATDD). The development process followed these steps:
 
-### DevOps & Infrastructure
-- **Containerization**: Docker + Docker Compose
-- **Container Registry**: GitHub Container Registry (GHCR)
-- **CI/CD**: GitHub Actions (50+ automated tests)
-- **Cloud**: AWS EC2 t2.micro (Free Tier)
-- **Orchestration**: Kubernetes + Docker Swarm support
-- **Deployment**: Zero-downtime rolling deployment
-- **Monitoring**: Health checks + Prometheus + custom monitoring scripts
-- **Load Balancing**: Traefik reverse proxy
+1. **Acceptance Test Writing (Reject)**:
+   - The user story is defined
+   - End-to-end test is written
+   - The test fails
+
+
+2. **Unit Test Writing (Reject)**:
+   - Required components are identified
+   - Unit tests are written
+   - Tests fail
+
+3. **Minimal Coding (Green)**:
+   - Write the minimum code that will pass the tests.
+   - Tests will pass.
+
+
+4. **Refactoring**:
+   - Code quality is improved
+   - Tests must still pass
+
+
+5. **Repeat**:
+   - The loop starts over for the new feature.
+
+## CI/CD Pipeline
+
+Our project uses a modern and automated CI/CD pipeline:
+
+![CI/CD Pipeline](docs/images/ci-cd.png)
+
+### Pipeline Stages
+
+1. **🧪 Run Tests (29s)** 
+   - Unit Tests 
+   - Integration Tests 
+   - Code Coverage
+
+2. **🐳 Build & Push Images (2m 17s)** 
+   - Multi-stage Docker builds 
+   - Push to GitHub Container Registry 
+   - Security scans
+
+3. **🚀 Deploy to Test (59s)** 
+   - Deploy to test environment 
+   - Health checks 
+   - Smoke tests
+
+4. **🔍 API Contract Tests (1m 5s)** 
+   - API contract validation 
+   - Performance tests 
+   - Security tests
+
+5. **🌐 E2E UI Tests (2m 16s)** 
+   - Playwright tests 
+   - Cross-browser testing 
+   - Visual regression tests
+
+6. **📦 Deploy to Production (1m 19s)** 
+   - Zero-downtime deployment 
+   - Canary release 
+   - Monitoring
+
+
+### Build Commands
+```bash
+# Development
+make dev              # Start development servers
+make test             # Run all tests
+make build            # Build Docker images
+make up               # Start local containers
+
+# Testing
+make test-unit        # Run unit tests only
+make test-int         # Run integration tests
+make e2e-test         # Run E2E UI tests
+
+# Deployment
+make deploy-test      # Deploy to test environment
+make deploy-prod      # Deploy to production
+make aws-setup        # AWS EC2 setup guide
+```
 
 ## Project Structure
 ```
@@ -65,251 +130,66 @@ todo-app/
 └── .github/workflows/   # CI/CD pipelines
 ```
 
-## Development Process
 
-### A-TDD Cycle
-1. **Write Acceptance Test** (Red) - Define user story
-2. **Write Unit Tests** (Red) - Define components
-3. **Write Minimal Code** (Green) - Make tests pass
-4. **Refactor** - Improve code quality
-5. **Repeat** - Next acceptance test
+## Quick Start
 
-### Build Commands
 ```bash
-# Development
-make dev              # Start development servers
-make test             # Run all tests
-make build            # Build Docker images
-make up               # Start local containers
+# Clone the repo
+git clone https://github.com/cemalocak/todo-app.git
 
-# Testing
-make test-unit        # Run unit tests only
-make test-int         # Run integration tests
-make e2e-test         # Run E2E UI tests
-
-# Deployment
-make deploy-test      # Deploy to test environment
-make deploy-prod      # Deploy to production
-make aws-setup        # AWS EC2 setup guide
-```
-
-## 🚀 CI/CD Pipeline
-
-### Deployment Architecture
-```mermaid
-graph TB
-    A[Developer] -->|Push| B[GitHub]
-    B --> C[GitHub Actions]
-    C --> D[Run Tests]
-    D --> E[Build Images]
-    E --> F[Push to GHCR]
-    F --> G[Deploy to AWS EC2]
-    G --> H[Health Check]
-    H --> I[Live Application]
-    
-    subgraph "Test Environment"
-        J[develop branch] --> K[Test Deployment]
-        K --> L[API Tests]
-        K --> M[E2E Tests]
-    end
-    
-    subgraph "Production Environment"  
-        N[main branch] --> O[Production Deployment]
-        O --> P[Blue-Green Deployment]
-    end
-```
-
-### Pipeline Stages
-1. **🧪 Test**: Unit + Integration + E2E tests
-2. **🐳 Build**: Multi-stage Docker builds
-3. **📦 Package**: Push to GitHub Container Registry
-4. **🚀 Deploy**: Zero-downtime deployment to AWS EC2
-5. **🏥 Monitor**: Health checks and monitoring
-
-### Branch Strategy
-- **`main`** → Production deployment (AWS EC2)
-- **`develop`** → Test environment deployment
-- **`feature/*`** → PR checks and tests only
-
-### Infrastructure
-- **Cloud**: AWS EC2 t2.micro (Free Tier)
-- **Container Registry**: GitHub Container Registry (GHCR)  
-- **CI/CD**: GitHub Actions
-- **Monitoring**: Docker health checks + custom scripts
-
-## API Endpoints
-- `GET /api/todos` - Get all todos
-- `POST /api/todos` - Create new todo
-- `GET /` - Serve frontend
-
-## 🛠️ Development Setup
-
-### Local Development
-```bash
-# 1. Clone repository
-git clone https://github.com/YOUR_USERNAME/todo-app.git
+# Go to the project directory
 cd todo-app
 
-# 2. Install dependencies
-go mod tidy
+# Start the development environment
+make up
 
-# 3. Run tests
-make test
+# Start the test environment
+docker-compose -f docker-compose.test.yml up -d
 
-# 4. Start development servers
-make dev
-# Backend: http://localhost:8080
-# Frontend: http://localhost:5173
+# Run E2E tests
+cd tests/e2e && npx playwright test
 ```
 
-### Production Deployment
-```bash
-# 1. Setup AWS EC2 (follow guide)
-make aws-setup
+## Features
 
-# 2. Configure GitHub secrets
-# See: docs/AWS_DEPLOYMENT_GUIDE.md
+- ✨ Modern and responsive design
+- 📱 Mobile-first approach
+- 🔄 Real-time updates
+- 🎯 CRUD operations
+- 🧪 Comprehensive test coverage
+- 🐳 Easy deployment with Docker
+- 🚀 CI/CD pipeline integration
 
-# 3. Deploy to test environment
-git checkout develop
-make deploy-test
+## Technology Stack
 
-# 4. Deploy to production
-git checkout main
-make deploy-prod
-```
+### Frontend
+- React + Vite
+- TailwindCSS
+- Playwright (E2E Tests)
 
-### Quick Start (Docker)
-```bash
-# Development environment
-docker-compose up --build
+### Backend
+- Go
+- SQLite
+- Go Test (Unit Tests)
 
-# Production environment
-docker-compose -f docker-compose.prod.yml up -d
-```
+### DevOps
+- Docker + Docker Compose
+- GitHub Actions
+- AWS EC2
 
-## Deployment Options
 
-### 1. Docker Compose (Recommended for Single Machine)
-```bash
-# Development
-docker-compose up --build
+## Lisans
 
-# Production  
-docker-compose -f docker-compose.prod.yml up -d
-```
-
-### 2. Kubernetes (Recommended for Production Clusters)
-```bash
-# Apply all manifests
-kubectl apply -f k8s/
-
-# Check status
-kubectl get all -n todo-app
-
-# See detailed guide: k8s/README.md
-```
-
-### 3. Docker Swarm (Multi-Node Clusters)
-```bash
-# Initialize swarm (manager node)
-docker swarm init
-
-# Deploy stack
-docker stack deploy -c docker-stack.yml todo-app
-
-# Check services
-docker stack services todo-app
-```
-
-### 4. AWS EC2 (VM Deployment)
-```bash
-# Follow detailed guide
-# See: docs/AWS_DEPLOYMENT_GUIDE.md
-```
-
-## Testing
-
-### Test Categories
-- **Unit Tests**: 15+ tests covering handlers, services, repositories
-- **Integration Tests**: End-to-end API testing
-- **Contract Tests**: API contract validation
-- **Performance Tests**: Load testing and benchmarks
-- **E2E Tests**: Browser automation with Playwright
-
-### Running Tests
-```bash
-# All tests
-go test ./...
-
-# Unit tests only
-go test ./test/unit/...
-
-# Performance tests
-go test ./test/performance/... -v
-
-# Contract tests
-go test ./test/contract/... -v
-
-# E2E tests
-cd tests/e2e && npm test
-```
-
-## Architecture Decisions
-
-### 1. **Clean Architecture**
-- Separation of concerns with layers: Handler → Service → Repository
-- Dependency injection for better testability
-- Interface-based design for easy mocking
-
-### 2. **Test-Driven Development (TDD)**
-- Red-Green-Refactor cycle
-- 50+ automated tests with 95%+ coverage
-- Contract-first API development
-
-### 3. **Container-First Design**
-- Multi-stage Docker builds for optimization
-- Health checks and graceful shutdowns
-- 12-factor app compliance
-
-### 4. **Deployment Flexibility** 
-- Support for Docker Compose, Kubernetes, Docker Swarm
-- Zero-downtime deployments
-- Infrastructure as Code
-
-### 5. **Monitoring & Observability**
-- Health check endpoints
-- Prometheus metrics ready
-- Structured logging
-- Distributed tracing ready
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Write tests first (TDD approach)
-4. Implement the feature
-5. Ensure all tests pass (`make test`)
-6. Commit your changes (`git commit -m 'Add amazing feature'`)
-7. Push to the branch (`git push origin feature/amazing-feature`)
-8. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```bash
-# Local production simulation
-make local-prod
-# Access: http://localhost
-```
-
-## Architectural Decisions
-- **Clean Architecture**: Separation of concerns with layers
-- **Repository Pattern**: Database abstraction
-- **TDD**: Test-first development approach
-- **Containerization**: Docker for consistent environments
-- **Modern Go**: Using latest Go features and best practices
+-
 
 ---
-*Built with ❤️ using Test-Driven Development* 
+
+<div align="center">
+
+**[Documentation](docs/README.md)** &nbsp;&nbsp;|&nbsp;&nbsp; 
+**[API Reference](docs/API.md)** &nbsp;&nbsp;|&nbsp;&nbsp; 
+**[Release Notes](CHANGELOG.md)**
+
+*Built with ❤️ using Test-Driven Development*
+
+</div> 
