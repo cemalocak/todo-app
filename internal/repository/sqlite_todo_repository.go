@@ -3,12 +3,11 @@ package repository
 import (
 	"database/sql"
 	"embed"
-	"fmt"
 	"time"
 
 	"todo-app/internal/model"
 
-	_ "modernc.org/sqlite"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 //go:embed database/schema.sql
@@ -22,7 +21,7 @@ type SQLiteTodoRepository struct {
 
 // NewSQLiteTodoRepository creates a new SQLite todo repository
 func NewSQLiteTodoRepository(dbPath string) (*SQLiteTodoRepository, error) {
-	db, err := sql.Open("sqlite", dbPath) // databse bağlantısını aç
+	db, err := sql.Open("sqlite3", dbPath) // databse bağlantısını aç
 	if err != nil {
 		return nil, err
 	}
@@ -77,26 +76,6 @@ func (r *SQLiteTodoRepository) Create(todo *model.Todo) (*model.Todo, error) {
 	return todo, nil
 }
 
-// GetByID returns a todo by its ID
-func (r *SQLiteTodoRepository) GetByID(id int) (*model.Todo, error) {
-	query := `
-		SELECT id, text, created_at, updated_at 
-		FROM todos 
-		WHERE id = ?
-	`
-
-	todo := &model.Todo{}
-	err := r.db.QueryRow(query, id).Scan(&todo.ID, &todo.Text, &todo.CreatedAt, &todo.UpdatedAt)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, fmt.Errorf("todo with id %d not found", id)
-		}
-		return nil, err
-	}
-
-	return todo, nil
-}
-
 // GetAll returns all todos from the database, ordered by created_at DESC
 func (r *SQLiteTodoRepository) GetAll() ([]*model.Todo, error) {
 	query := `
@@ -122,55 +101,6 @@ func (r *SQLiteTodoRepository) GetAll() ([]*model.Todo, error) {
 	}
 
 	return todos, rows.Err()
-}
-
-// Update modifies an existing todo in the database
-func (r *SQLiteTodoRepository) Update(todo *model.Todo) (*model.Todo, error) {
-	now := time.Now()
-
-	query := `
-		UPDATE todos 
-		SET text = ?, updated_at = ? 
-		WHERE id = ?
-	`
-
-	result, err := r.db.Exec(query, todo.Text, now, todo.ID)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := result.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	if rowsAffected == 0 {
-		return nil, fmt.Errorf("todo with id %d not found", todo.ID)
-	}
-
-	todo.UpdatedAt = now
-	return todo, nil
-}
-
-// Delete removes a todo from the database
-func (r *SQLiteTodoRepository) Delete(id int) error {
-	query := `DELETE FROM todos WHERE id = ?`
-
-	result, err := r.db.Exec(query, id)
-	if err != nil {
-		return err
-	}
-
-	rowsAffected, err := result.RowsAffected()
-	if err != nil {
-		return err
-	}
-
-	if rowsAffected == 0 {
-		return fmt.Errorf("todo with id %d not found", id)
-	}
-
-	return nil
 }
 
 // DBPath returns the database file path

@@ -45,9 +45,6 @@ func main() {
 	// API routes
 	mux.HandleFunc("POST /api/todos", h.CreateTodo)
 	mux.HandleFunc("GET /api/todos", h.GetAllTodos)
-	mux.HandleFunc("GET /api/todos/", h.GetTodoByID)
-	mux.HandleFunc("PUT /api/todos/", h.UpdateTodo)
-	mux.HandleFunc("DELETE /api/todos/", h.DeleteTodo)
 	mux.HandleFunc("POST /api/test/truncate", h.TruncateTodos) // Test database cleanup endpoint
 
 	// Serve static files (frontend)

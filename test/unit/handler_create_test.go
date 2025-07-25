@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"todo-app/internal/handler"
 	"todo-app/internal/repository"
 	"todo-app/internal/service"
@@ -15,7 +16,8 @@ import (
 
 func TestTodoHandler_CreateTodo(t *testing.T) {
 	// Given
-	repo := repository.NewInMemoryTodoRepository()
+	repo, err := repository.NewSQLiteTodoRepository(":memory:")
+	require.NoError(t, err)
 	svc := service.NewTodoService(repo)
 	h := handler.NewTodoHandler(svc)
 
@@ -39,7 +41,8 @@ func TestTodoHandler_CreateTodo(t *testing.T) {
 
 func TestTodoHandler_CreateTodo_EmptyText(t *testing.T) {
 	// Given
-	repo := repository.NewInMemoryTodoRepository()
+	repo, err := repository.NewSQLiteTodoRepository(":memory:")
+	require.NoError(t, err)
 	svc := service.NewTodoService(repo)
 	h := handler.NewTodoHandler(svc)
 
@@ -58,7 +61,8 @@ func TestTodoHandler_CreateTodo_EmptyText(t *testing.T) {
 
 func TestTodoHandler_CreateTodo_InvalidJSON(t *testing.T) {
 	// Given
-	repo := repository.NewInMemoryTodoRepository()
+	repo, err := repository.NewSQLiteTodoRepository(":memory:")
+	require.NoError(t, err)
 	svc := service.NewTodoService(repo)
 	h := handler.NewTodoHandler(svc)
 

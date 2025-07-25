@@ -7,22 +7,23 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"todo-app/internal/handler"
 	"todo-app/internal/repository"
 	"todo-app/internal/service"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // TestAPI_ResponseStructure tests the API response structure compliance
 func TestAPI_ResponseStructure(t *testing.T) {
 	tests := []struct {
-		name            string
-		method          string
-		path            string
-		body            interface{}
-		expectedStatus  int
-		expectedFields  []string
+		name           string
+		method         string
+		path           string
+		body           interface{}
+		expectedStatus int
+		expectedFields []string
 	}{
 		{
 			name:           "POST /api/todos - creates todo with correct structure",
@@ -45,7 +46,13 @@ func TestAPI_ResponseStructure(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// Setup
-			repo := repository.NewInMemoryTodoRepository()
+			repo, err := repository.NewSQLiteTodoRepository("test.db")
+			require.NoError(t, err)
+			defer repo.Close()
+
+			err = repo.Truncate() // Clean state for each test
+			require.NoError(t, err)
+
 			svc := service.NewTodoService(repo)
 			h := handler.NewTodoHandler(svc)
 
@@ -90,7 +97,13 @@ func TestAPI_ResponseStructure(t *testing.T) {
 
 // TestAPI_ContentTypeHeaders tests correct content type handling
 func TestAPI_ContentTypeHeaders(t *testing.T) {
-	repo := repository.NewInMemoryTodoRepository()
+	repo, err := repository.NewSQLiteTodoRepository("test.db")
+	require.NoError(t, err)
+	defer repo.Close()
+
+	err = repo.Truncate() // Clean state
+	require.NoError(t, err)
+
 	svc := service.NewTodoService(repo)
 	h := handler.NewTodoHandler(svc)
 
@@ -121,11 +134,11 @@ func TestAPI_ContentTypeHeaders(t *testing.T) {
 			requestBody := map[string]string{"text": "test todo"}
 			jsonBody, _ := json.Marshal(requestBody)
 			req := httptest.NewRequest("POST", "/api/todos", bytes.NewBuffer(jsonBody))
-			
+
 			if tt.contentType != "" {
 				req.Header.Set("Content-Type", tt.contentType)
 			}
-			
+
 			rec := httptest.NewRecorder()
 			h.CreateTodo(rec, req)
 
@@ -134,50 +147,15 @@ func TestAPI_ContentTypeHeaders(t *testing.T) {
 	}
 }
 
-// TestAPI_ErrorResponses tests consistent error response format
-func TestAPI_ErrorResponses(t *testing.T) {
-	repo := repository.NewInMemoryTodoRepository()
-	svc := service.NewTodoService(repo)
-	h := handler.NewTodoHandler(svc)
-
-	tests := []struct {
-		name           string
-		endpoint       func(w http.ResponseWriter, r *http.Request)
-		request        *http.Request
-		expectedStatus int
-	}{
-		{
-			name:           "Get non-existent todo",
-			endpoint:       h.GetTodoByID,
-			request:        httptest.NewRequest("GET", "/api/todos/999", nil),
-			expectedStatus: http.StatusNotFound,
-		},
-		{
-			name:           "Update non-existent todo",
-			endpoint:       h.UpdateTodo,
-			request:        httptest.NewRequest("PUT", "/api/todos/999", bytes.NewBuffer([]byte(`{"text":"updated"}`))),
-			expectedStatus: http.StatusNotFound,
-		},
-		{
-			name:           "Delete non-existent todo",
-			endpoint:       h.DeleteTodo,
-			request:        httptest.NewRequest("DELETE", "/api/todos/999", nil),
-			expectedStatus: http.StatusNotFound,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			rec := httptest.NewRecorder()
-			tt.endpoint(rec, tt.request)
-			assert.Equal(t, tt.expectedStatus, rec.Code)
-		})
-	}
-}
-
 // TestAPI_CORS tests CORS headers (if implemented)
 func TestAPI_CORSHeaders(t *testing.T) {
-	repo := repository.NewInMemoryTodoRepository()
+	repo, err := repository.NewSQLiteTodoRepository("test.db")
+	require.NoError(t, err)
+	defer repo.Close()
+
+	err = repo.Truncate() // Clean state
+	require.NoError(t, err)
+
 	svc := service.NewTodoService(repo)
 	h := handler.NewTodoHandler(svc)
 
@@ -186,10 +164,6 @@ func TestAPI_CORSHeaders(t *testing.T) {
 
 	h.GetAllTodos(rec, req)
 
-	// Check if CORS headers are set (implementation dependent)
-	// This test documents expected CORS behavior
 	assert.Equal(t, http.StatusOK, rec.Code)
-	
-	// Note: Add CORS header assertions here when CORS is implemented
-	// assert.Equal(t, "*", rec.Header().Get("Access-Control-Allow-Origin"))
-} 
+	assert.Equal(t, "application/json", rec.Header().Get("Content-Type"))
+}

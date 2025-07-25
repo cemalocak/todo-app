@@ -31,41 +31,9 @@ function TodoApp() {
 		try {
 			setLoading(true)
 			const response = await axios.post('/api/todos', { text })
-			setTodos(prevTodos => [...prevTodos, response.data])
+			setTodos(prevTodos => [response.data, ...prevTodos])
 		} catch (error) {
 			console.error('Error adding todo:', error)
-		} finally {
-			setLoading(false)
-		}
-	}
-
-	const updateTodo = async (id, text) => {
-		if (!text.trim()) return
-
-		try {
-			setLoading(true)
-			const response = await axios.put(`/api/todos/${id}`, { text })
-			setTodos(prevTodos =>
-				prevTodos.map(todo =>
-					todo.id === id ? response.data : todo
-				)
-			)
-		} catch (error) {
-			console.error('Error updating todo:', error)
-		} finally {
-			setLoading(false)
-		}
-	}
-
-	const deleteTodo = async (id) => {
-		try {
-			setLoading(true)
-			await axios.delete(`/api/todos/${id}`)
-			setTodos(prevTodos =>
-				prevTodos.filter(todo => todo.id !== id)
-			)
-		} catch (error) {
-			console.error('Error deleting todo:', error)
 		} finally {
 			setLoading(false)
 		}
@@ -83,8 +51,6 @@ function TodoApp() {
 				<TodoList
 					todos={todos}
 					loading={loading}
-					onUpdateTodo={updateTodo}
-					onDeleteTodo={deleteTodo}
 				/>
 			</main>
 

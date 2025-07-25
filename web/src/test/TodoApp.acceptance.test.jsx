@@ -56,119 +56,6 @@ describe('TodoApp Acceptance Tests', () => {
 		})
 	})
 
-	test('User Story: Edit existing todo item', async () => {
-		// Given: Todo list with one item
-		const mockTodos = [
-			{ id: 1, text: 'süt al' }
-		]
-		axios.get.mockResolvedValue({ data: mockTodos })
-		axios.put.mockResolvedValue({
-			data: { id: 1, text: 'organik süt al' }
-		})
-
-		const user = userEvent.setup()
-		render(<TodoApp />)
-
-		// Wait for todos to load
-		await waitFor(() => {
-			expect(screen.getByText('süt al')).toBeInTheDocument()
-		})
-
-		// When: User clicks edit button
-		const editButton = screen.getByRole('button', { name: /düzenle/i })
-		await user.click(editButton)
-
-		// Then: Todo should become editable (input field appears)
-		const editInput = screen.getByDisplayValue('süt al')
-		expect(editInput).toBeInTheDocument()
-
-		// When: User changes text and saves
-		await user.clear(editInput)
-		await user.type(editInput, 'organik süt al')
-		const saveButton = screen.getByRole('button', { name: /kaydet/i })
-		await user.click(saveButton)
-
-		// Then: Updated todo should appear in the list
-		await waitFor(() => {
-			expect(screen.getByText('organik süt al')).toBeInTheDocument()
-		})
-
-		// And: API call should be made correctly
-		expect(axios.put).toHaveBeenCalledWith('/api/todos/1', {
-			text: 'organik süt al'
-		})
-	})
-
-	test('User Story: Delete existing todo item', async () => {
-		// Given: Todo list with two items
-		const mockTodos = [
-			{ id: 1, text: 'süt al' },
-			{ id: 2, text: 'alışveriş yap' }
-		]
-		axios.get.mockResolvedValue({ data: mockTodos })
-		axios.delete.mockResolvedValue({})
-
-		const user = userEvent.setup()
-		render(<TodoApp />)
-
-		// Wait for todos to load
-		await waitFor(() => {
-			expect(screen.getByText('süt al')).toBeInTheDocument()
-			expect(screen.getByText('alışveriş yap')).toBeInTheDocument()
-		})
-
-		// When: User clicks delete button for first todo
-		const deleteButtons = screen.getAllByRole('button', { name: /sil/i })
-		await user.click(deleteButtons[0])
-
-		// Then: Todo should be removed from the list
-		await waitFor(() => {
-			expect(screen.queryByText('süt al')).not.toBeInTheDocument()
-		})
-
-		// And: Other todo should still be visible
-		expect(screen.getByText('alışveriş yap')).toBeInTheDocument()
-
-		// And: API call should be made correctly
-		expect(axios.delete).toHaveBeenCalledWith('/api/todos/1')
-	})
-
-	test('User Story: Cancel edit operation', async () => {
-		// Given: Todo list with one item
-		const mockTodos = [
-			{ id: 1, text: 'süt al' }
-		]
-		axios.get.mockResolvedValue({ data: mockTodos })
-
-		const user = userEvent.setup()
-		render(<TodoApp />)
-
-		// Wait for todos to load
-		await waitFor(() => {
-			expect(screen.getByText('süt al')).toBeInTheDocument()
-		})
-
-		// When: User clicks edit button
-		const editButton = screen.getByRole('button', { name: /düzenle/i })
-		await user.click(editButton)
-
-		// And: User changes text but cancels
-		const editInput = screen.getByDisplayValue('süt al')
-		await user.clear(editInput)
-		await user.type(editInput, 'organik süt al')
-
-		const cancelButton = screen.getByRole('button', { name: /İptal/i })
-		await user.click(cancelButton)
-
-		// Then: Original todo should be restored
-		await waitFor(() => {
-			expect(screen.getByText('süt al')).toBeInTheDocument()
-		})
-
-		// And: No API call should be made
-		expect(axios.put).not.toHaveBeenCalled()
-	})
-
 	test('User Story: Empty state is shown when no todos', async () => {
 		// Given: API returns empty array
 		axios.get.mockResolvedValue({ data: [] })
@@ -194,8 +81,8 @@ describe('TodoApp Acceptance Tests', () => {
 
 		// Then: All todos should be visible
 		await waitFor(() => {
-			expect(screen.getByText('süt al')).toBeInTheDocument()
 			expect(screen.getByText('alışveriş yap')).toBeInTheDocument()
+			expect(screen.getByText('süt al')).toBeInTheDocument()
 		})
 
 		// And: Todo count should be displayed

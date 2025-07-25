@@ -11,10 +11,10 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_PATH: "todos.db"
+      DB_PATH: "/app/todos.db"
       PORT: "8080"
     volumes:
-      - ./todos.db:/app/todos.db
+      - todo-data:/app
     networks:
       - todo-network
     healthcheck:
@@ -46,6 +46,9 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+
+volumes:
+  todo-data:
 
 networks:
   todo-network:

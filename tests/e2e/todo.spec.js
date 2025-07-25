@@ -53,40 +53,6 @@ test.describe('Todo App CRUD Tests', () => {
 	});
 });
 
-test.describe('Todo App CRUD Tests', () => {
-	test.beforeAll(async ({ browser }) => {
-		console.log('🚀 CRUD testleri başlıyor...');
-		const page = await browser.newPage();
-		await clearTestDatabase(page);
-		await page.close();
-	});
-
-	test.beforeEach(async ({ page }) => {
-		await page.goto(BASE_URL);
-		console.log('🧪 Yeni CRUD testi başlıyor...');
-	});
-
-
-
-	test('Todo CRUD operations work correctly', async ({ page }) => {
-		// Create
-		await page.fill('[data-testid="todo-input"]', 'Test todo');
-		await page.click('[data-testid="add-button"]');
-		await page.waitForTimeout(2000);
-		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
-
-		// Update 
-		await page.click('[data-testid="edit-button"]');
-		await page.fill('[data-testid="edit-input"]', 'Updated todo');
-		await page.click('[data-testid="save-button"]');
-		await expect(page.locator('[data-testid="todo-item"]')).toContainText('Updated todo');
-
-		// Delete 
-		await page.click('[data-testid="delete-button"]');
-		await expect(page.locator('[data-testid="todo-item"]')).not.toBeVisible();
-	});
-});
-
 // UI ve Erişilebilirlik testleri
 test.describe('Todo App UI Tests', () => {
 	test.beforeAll(async ({ browser }) => {
