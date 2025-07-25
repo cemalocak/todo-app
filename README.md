@@ -7,7 +7,6 @@
 [![CI/CD Status](https://github.com/cemalocak/todo-app/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/cemalocak/todo-app/actions)
 [![Test Coverage](https://codecov.io/gh/cemalocak/todo-app/branch/main/graph/badge.svg)](https://codecov.io/gh/cemalocak/todo-app)
 [![Go Report Card](https://goreportcard.com/badge/github.com/cemalocak/todo-app)](https://goreportcard.com/report/github.com/cemalocak/todo-app)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
 
@@ -43,7 +42,7 @@ This project was developed using the principles of Test-Driven Development (TDD)
 
 Our project uses a modern and automated CI/CD pipeline:
 
-![CI/CD Pipeline](docs/images/ci-cd.png)
+![CI/CD Pipeline](docs/images/ci_cd.png)
 
 ### Pipeline Stages
 
@@ -186,9 +185,9 @@ cd tests/e2e && npx playwright test
 
 <div align="center">
 
-**[Documentation](docs/README.md)** &nbsp;&nbsp;|&nbsp;&nbsp; 
 **[API Reference](docs/API.md)** &nbsp;&nbsp;|&nbsp;&nbsp; 
-**[Release Notes](CHANGELOG.md)**
+**[Release Notes](docs/CHANGELOG.md)** &nbsp;&nbsp;|&nbsp;&nbsp;
+**[AWS Deployment](docs/AWS_DEPLOYMENT_GUIDE.md)** 
 
 *Built with ❤️ using Test-Driven Development*
 
